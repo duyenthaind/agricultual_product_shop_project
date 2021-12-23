@@ -155,6 +155,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Web.config_sample" />
+    <Content Include="wwwroot\bootstrap\css\bootstrap.min.css" />
+    <Content Include="wwwroot\bootstrap\js\bootstrap.min.js" />
     <Content Include="wwwroot\css\bootstrap.min.css" />
     <Content Include="wwwroot\css\font-awesome.min.css" />
     <Content Include="wwwroot\css\nivo-slider.css" />
@@ -162,9 +164,21 @@
     <Content Include="wwwroot\css\owl.theme.css" />
     <Content Include="wwwroot\css\responsive.css" />
     <Content Include="wwwroot\css\style.css" />
+    <Content Include="wwwroot\fonts\fa-brands-400.svg" />
+    <Content Include="wwwroot\fonts\fa-regular-400.svg" />
+    <Content Include="wwwroot\fonts\fa-solid-900.svg" />
+    <Content Include="wwwroot\fonts\font-awesome.min.css" />
+    <Content Include="wwwroot\fonts\fontawesome-all.min.css" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <Content Include="wwwroot\fonts\fontawesome5-overrides.min.css" />
     <Content Include="wwwroot\images\199px-Noodles_&amp;_Company_Logo_svg.png" />
     <Content Include="wwwroot\images\American-Express.png" />
     <Content Include="wwwroot\images\author.jpg" />
+    <Content Include="wwwroot\images\avatars\avatar1.jpeg" />
+    <Content Include="wwwroot\images\avatars\avatar2.jpeg" />
+    <Content Include="wwwroot\images\avatars\avatar3.jpeg" />
+    <Content Include="wwwroot\images\avatars\avatar4.jpeg" />
+    <Content Include="wwwroot\images\avatars\avatar5.jpeg" />
     <Content Include="wwwroot\images\blog-1.jpg" />
     <Content Include="wwwroot\images\category-image-1.jpg" />
     <Content Include="wwwroot\images\category-image-2.jpg" />
@@ -178,6 +192,9 @@
     <Content Include="wwwroot\images\company-6.png" />
     <Content Include="wwwroot\images\company-8.png" />
     <Content Include="wwwroot\images\company-9.png" />
+    <Content Include="wwwroot\images\dogs\image1.jpeg" />
+    <Content Include="wwwroot\images\dogs\image2.jpeg" />
+    <Content Include="wwwroot\images\dogs\image3.jpeg" />
     <Content Include="wwwroot\images\food-ad.png" />
     <Content Include="wwwroot\images\footer-logo.png" />
     <Content Include="wwwroot\images\kewledits.weebly %28120%29.png" />
@@ -209,6 +226,7 @@
     <Content Include="wwwroot\images\Visa-Electron.png" />
     <Content Include="wwwroot\images\Visa.png" />
     <Content Include="wwwroot\js\bootstrap.min.js" />
+    <Content Include="wwwroot\js\chart.min.js" />
     <Content Include="wwwroot\js\jquery.min.js" />
     <Content Include="wwwroot\js\jquery.nicescroll.js" />
     <Content Include="wwwroot\js\jquery.nivo.slider.js" />
@@ -216,6 +234,7 @@
     <Content Include="wwwroot\js\main.js" />
     <Content Include="wwwroot\js\owl.carousel.min.js" />
     <Content Include="wwwroot\js\product.js" />
+    <Content Include="wwwroot\js\script.min.js" />
     <Content Include="wwwroot\uploads\products\2021\1164079.jpg" />
     <Content Include="wwwroot\uploads_sample\products\2021\1164079.jpg" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -245,6 +264,24 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="wwwroot\images\header.psd" />
     <Content Include="Views\Shared\_ClientLayout.cshtml" />
+    <Content Include="wwwroot\fonts\fa-brands-400.eot" />
+    <Content Include="wwwroot\fonts\fa-brands-400.ttf" />
+    <Content Include="wwwroot\fonts\fa-brands-400.woff" />
+    <Content Include="wwwroot\fonts\fa-brands-400.woff2" />
+    <Content Include="wwwroot\fonts\fa-regular-400.eot" />
+    <Content Include="wwwroot\fonts\fa-regular-400.ttf" />
+    <Content Include="wwwroot\fonts\fa-regular-400.woff" />
+    <Content Include="wwwroot\fonts\fa-regular-400.woff2" />
+    <Content Include="wwwroot\fonts\fa-solid-900.eot" />
+    <Content Include="wwwroot\fonts\fa-solid-900.ttf" />
+    <Content Include="wwwroot\fonts\fa-solid-900.woff" />
+    <Content Include="wwwroot\fonts\fa-solid-900.woff2" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.eot" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <Content Include="wwwroot\fonts\FontAwesome.otf" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
