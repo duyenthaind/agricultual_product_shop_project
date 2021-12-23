@@ -353,3 +353,4 @@ MigrationBackup/
 bin/
 obj/
 NongSanShop/Web.config
+NongSanShop/wwwroot/uploads/
