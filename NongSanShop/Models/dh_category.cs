@@ -24,6 +24,8 @@ namespace NongSanShop.Models
         public long? created { get; set; }
 
         public long? updated { get; set; }
+        
+        public string avatar { set; get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dh_product> dh_product { get; set; }
