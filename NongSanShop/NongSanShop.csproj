@@ -129,6 +129,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,6 +237,7 @@
     <Content Include="wwwroot\js\owl.carousel.min.js" />
     <Content Include="wwwroot\js\product.js" />
     <Content Include="wwwroot\js\script.min.js" />
+    <Content Include="wwwroot\uploads\categories\no_avatar.png" />
     <Content Include="wwwroot\uploads\products\2021\1164079.jpg" />
     <Content Include="wwwroot\uploads_sample\products\2021\1164079.jpg" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -282,6 +285,13 @@
     <Content Include="wwwroot\fonts\fontawesome-webfont.woff2" />
     <Content Include="wwwroot\fonts\FontAwesome.otf" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Info.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
