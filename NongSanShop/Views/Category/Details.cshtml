@@ -1,0 +1,66 @@
+﻿@model NongSanShop.Models.dh_category
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div>
+        <h4>Details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.created)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.created)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.updated)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.updated)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.avatar)
+            </dt>
+
+            <dd>
+                @{
+                    string imgPath = "~/wwwroot/uploads/categories/" + Model.avatar;
+                }
+                <img src="@Url.Content(imgPath)" width="100" />
+                <br />
+                @Html.DisplayFor(model => model.avatar)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+
+
