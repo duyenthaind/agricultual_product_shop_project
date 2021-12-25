@@ -1,4 +1,4 @@
-namespace NongSanShop.Models
+﻿namespace NongSanShop.Models
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace NongSanShop.Models
 
         public int id { get; set; }
 
+        [Required(ErrorMessage = "Không được để trống")]
         [StringLength(255)]
         public string name { get; set; }
 
@@ -24,7 +25,7 @@ namespace NongSanShop.Models
         public long? created { get; set; }
 
         public long? updated { get; set; }
-        
+
         public string avatar { set; get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

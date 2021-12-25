@@ -1,4 +1,4 @@
-﻿@model NongSanShop.Models.dh_category
+﻿@model NongSanShop.Models.dh_product
 
 @{
     ViewBag.Title = "Edit";
@@ -6,11 +6,12 @@
 }
 
 <div class="container-fluid">
-    @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
+
         <div class="form-horizontal">
-            <h4>dh_category</h4>
+            <h4>Edit</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
@@ -32,6 +33,42 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.category_id, "category_id", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+                @{
+                    string ImagePath = "~/wwwroot/uploads/products/" + Model.avatar;
+                }
+                <div class="col-md-10">
+                    <img id="output" class="img-rounded" alt="Ảnh" width="150" height="150" src="@Url.Content(ImagePath)" />
+                    <p><label for="ufile" style="cursor: pointer;">Chọn file ảnh</label></p>
+                    <input name="ImageFile" type="file" id="ufile" style="display : none;" onchange="loadFile(event)" />
+                </div>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.created, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
@@ -48,20 +85,8 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.avatar, htmlAttributes: new { @class = "control-label col-md-2" })
-                @{
-                    string ImagePath = "~/wwwroot/uploads/categories/" + Model.avatar;
-                }
-                <div class="col-md-10">
-                    <img id="output" class="img-rounded" alt="Ảnh" width="150" height="150" src="@Url.Content(ImagePath)" />
-                    <p><label for="ufile" style="cursor: pointer;">Chọn file ảnh</label></p>
-                    <input name="ImageFile" type="file" id="ufile" style="display : none;" onchange="loadFile(event)" />
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -88,4 +113,3 @@
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>
-

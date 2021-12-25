@@ -1,4 +1,4 @@
-namespace NongSanShop.Models
+﻿namespace NongSanShop.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,8 +10,11 @@ namespace NongSanShop.Models
     {
         public int id { get; set; }
 
+        [Required(ErrorMessage ="Không được để trống")]
+        [StringLength(100)]
         public string thumbnail { get; set; }
 
+        [Required(ErrorMessage = "Không được để trống")]
         public string content { get; set; }
 
         public long? created { get; set; }
