@@ -1,4 +1,4 @@
-namespace NongSanShop.Models
+﻿namespace NongSanShop.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,11 +17,14 @@ namespace NongSanShop.Models
 
         public int id { get; set; }
 
+        [Required(ErrorMessage = "Không được để trống")]
         [StringLength(100)]
         public string name { get; set; }
 
+        [Column(TypeName = "text")]
         public string description { get; set; }
 
+        [Column(TypeName = "numeric")]
         public long? price { get; set; }
 
         public int? quantity { get; set; }

@@ -1,9 +1,10 @@
-﻿@model IEnumerable<NongSanShop.Models.dh_category>
+﻿@model IEnumerable<NongSanShop.Models.dh_blog>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Category</h3>
@@ -36,13 +37,10 @@
                     <thead>
                         <tr>
                             <th>
-                                Avatar
+                                thumbnail
                             </th>
                             <th>
-                                Name
-                            </th>
-                            <th>
-                                Description
+                                Content
                             </th>
                             <th>
                                 Created
@@ -58,18 +56,10 @@
                         {
                             <tr>
                                 <td>
-                                    @{
-                                        string imgPath = "~/wwwroot/uploads/categories/" + item.avatar;
-                                    }
-                                    <img src="@Url.Content(imgPath)" width="100" />
-                                    <br />
-                                    @Html.DisplayFor(modelItem => item.avatar)
+                                    @Html.DisplayFor(modelItem => item.thumbnail)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.description)
+                                    @Html.DisplayFor(modelItem => item.content)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.created)
@@ -89,17 +79,12 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Avatar
+                                    Thumbnail
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Name
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Description
+                                    Content
                                 </strong>
                             </td>
                             <td>

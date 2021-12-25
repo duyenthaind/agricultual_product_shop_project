@@ -79,6 +79,10 @@
     <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
 <script>
     var loadFile = function (event) {
         var avt = document.getElementById("output");
