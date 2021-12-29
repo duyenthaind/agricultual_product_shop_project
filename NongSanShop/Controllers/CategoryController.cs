@@ -63,9 +63,8 @@ namespace NongSanShop.Controllers
                     }
                     db.dh_category.Add(dh_category);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
                 }
-                return View(dh_category);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -110,9 +109,8 @@ namespace NongSanShop.Controllers
                     }
                     db.Entry(dh_category).State = EntityState.Modified;
                     db.SaveChanges();
-                return RedirectToAction("Index");
                 }
-                return View(dh_category);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

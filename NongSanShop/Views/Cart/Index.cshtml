@@ -1,13 +1,13 @@
-﻿@model IEnumerable<NongSanShop.Models.dh_product>
+﻿@model IEnumerable<NongSanShop.Models.dh_cart>
 
 @{
-    ViewBag.Title = "Sản phẩm";
+    ViewBag.Title = "Gio hàng";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Sản phẩm</h3>
+    <h3 class="text-dark mb-4">Giỏ hàng</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">
@@ -37,22 +37,16 @@
                     <thead>
                         <tr>
                             <th>
-                                Tên danh mục
-                            </th>
-                            <th>
                                 Tên sản phẩm
                             </th>
                             <th>
-                                Mô tả
-                            </th>
-                            <th>
-                                Giá
+                                Tên người dùng
                             </th>
                             <th>
                                 Số lượng
                             </th>
                             <th>
-                                Hình ảnh
+                                Giá
                             </th>
                             <th>
                                 Thời gian tạo
@@ -68,27 +62,16 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.dh_category.name)
+                                    @Html.DisplayFor(modelItem => item.dh_product.name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.price)
+                                    @Html.DisplayFor(modelItem => item.dh_user.name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.quantity)
                                 </td>
                                 <td>
-                                    @{
-                                        string imgPath = "~/wwwroot/uploads/products/" + item.avatar;
-                                    }
-                                    <img src="@Url.Content(imgPath)" width="100" />
-                                    <br />
-                                    @Html.DisplayFor(modelItem => item.avatar)
+                                    @Html.DisplayFor(modelItem => item.price)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.created)
@@ -108,22 +91,12 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Tên danh mục
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
                                     Tên sản phẩm
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Mô tả
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Giá
+                                    Tên người dùng
                                 </strong>
                             </td>
                             <td>
@@ -133,7 +106,7 @@
                             </td>
                             <td>
                                 <strong>
-                                    Hình ảnh
+                                    Giá
                                 </strong>
                             </td>
                             <td>

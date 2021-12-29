@@ -7,11 +7,11 @@
 
 <div class="container-fluid">
     <div>
-        <h4>Details</h4>
+        <h4>Chi tiết danh mục</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.name)
+                Tên danh mục
             </dt>
 
             <dd>
@@ -19,7 +19,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.description)
+                Mô tả
             </dt>
 
             <dd>
@@ -27,7 +27,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.created)
+                Thời gian tạo
             </dt>
 
             <dd>
@@ -35,7 +35,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.updated)
+                Thời gian cập nhật
             </dt>
 
             <dd>
@@ -43,14 +43,14 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.avatar)
+                Hình ảnh minh họa
             </dt>
 
             <dd>
                 @{
                     string imgPath = "~/wwwroot/uploads/categories/" + Model.avatar;
                 }
-                <img src="@Url.Content(imgPath)" width="100" />
+                <img src="@Url.Content(imgPath)" width="400" />
                 <br />
                 @Html.DisplayFor(model => model.avatar)
             </dd>
@@ -58,8 +58,8 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Quay lại", "Index")
     </p>
 </div>
 

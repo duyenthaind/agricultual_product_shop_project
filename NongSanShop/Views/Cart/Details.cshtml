@@ -1,7 +1,7 @@
-﻿@model NongSanShop.Models.dh_blog
+﻿@model NongSanShop.Models.dh_cart
 
 @{
-    ViewBag.Title = "Bài viết";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -11,19 +11,35 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                Tiêu đề
+                Tên sản phẩm
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.thumbnail)
+                @Html.DisplayFor(model => model.dh_product.name)
             </dd>
 
             <dt>
-                Nội dung
+                Tên người dùng
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.content)
+                @Html.DisplayFor(model => model.dh_user.name)
+            </dd>
+
+            <dt>
+                Số lượng
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.quantity)
+            </dd>
+
+            <dt>
+                Giá
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price)
             </dd>
 
             <dt>

@@ -1,12 +1,11 @@
-﻿@model NongSanShop.Models.dh_blog
+﻿@model NongSanShop.Models.dh_cart
 
 @{
-    ViewBag.Title = "Bài viết";
+    ViewBag.Title = "Giỏ hàng";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="container-fluid">
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -16,18 +15,34 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                <label class="control-label col-md-2">Tiêu đề</label>
+                <label class="control-label col-md-2">Khách hàng</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.thumbnail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.thumbnail, "", new { @class = "text-danger" })
+                    @Html.DropDownList("user_id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2">Nội dung</label>
+                <label class="control-label col-md-2">Sản phẩm</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.content, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
+                    @Html.DropDownList("product_id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Số lượng</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Giá</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -56,17 +71,11 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Quay lại", "Index")
     </div>
 </div>
 
 
-
-@if (ViewBag.Error != null)
-{
-    <br />
-    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
-}
 
 
 @section Scripts {

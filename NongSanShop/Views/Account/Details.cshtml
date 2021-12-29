@@ -5,87 +5,89 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container-fluid">
+    <div>
+        <h4>Chi tiết</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên đăng nhập
+            </dt>
 
-<div>
-    <h4>dh_user</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.username)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.username)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.username)
-        </dd>
+            <dt>
+                Mật khẩu
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.password)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.password)
-        </dd>
+            <dt>
+                Tên người dùng
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+            <dt>
+                Email
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+            <dt>
+                Số điện thoại
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.phone)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.phone)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.phone)
-        </dd>
+            <dt>
+                Địa chỉ
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.address)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
+            <dt>
+                Quyền
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.role)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.role)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.role)
-        </dd>
+            <dt>
+                Thời gian tạo
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.created)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.created)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.created)
-        </dd>
+            <dt>
+                Thời gian cập nhật
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.updated)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.updated)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.updated)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
