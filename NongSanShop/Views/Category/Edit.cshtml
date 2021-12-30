@@ -46,6 +46,8 @@
                     @Html.ValidationMessageFor(model => model.updated, "", new { @class = "text-danger" })
                 </div>
             </div>
+            
+            @Html.HiddenFor(model => model.avatar)
 
             <div class="form-group">
                 <label class="control-label col-md-2">Ảnh minh họa</label>

@@ -30,8 +30,10 @@
                 Thời gian tạo
             </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.created)
+            <dd>@{
+                    var timeStampCreated = Model.created;
+                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampCreated.GetValueOrDefault()).ToString("MM/dd/yyyy"))
+                }
             </dd>
 
             <dt>
@@ -39,7 +41,10 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.updated)
+                @{
+                    var timeStampUpdated = Model.updated;
+                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampUpdated.GetValueOrDefault()).ToString("MM/dd/yyyy"))
+                }
             </dd>
 
         </dl>

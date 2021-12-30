@@ -28,12 +28,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_cart dh_cart = db.dh_cart.Find(id);
-            if (dh_cart == null)
+            dh_cart dhCart = db.dh_cart.Find(id);
+            if (dhCart == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_cart);
+            return View(dhCart);
         }
 
         // GET: Cart/Create
@@ -49,18 +49,18 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,user_id,quantity,price,product_id,created,updated")] dh_cart dh_cart)
+        public ActionResult Create([Bind(Include = "id,user_id,quantity,price,product_id,created,updated")] dh_cart dhCart)
         {
             if (ModelState.IsValid)
             {
-                db.dh_cart.Add(dh_cart);
+                db.dh_cart.Add(dhCart);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dh_cart.product_id);
-            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dh_cart.user_id);
-            return View(dh_cart);
+            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhCart.product_id);
+            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dhCart.user_id);
+            return View(dhCart);
         }
 
         // GET: Cart/Edit/5
@@ -70,14 +70,14 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_cart dh_cart = db.dh_cart.Find(id);
-            if (dh_cart == null)
+            dh_cart dhCart = db.dh_cart.Find(id);
+            if (dhCart == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dh_cart.product_id);
-            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dh_cart.user_id);
-            return View(dh_cart);
+            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhCart.product_id);
+            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dhCart.user_id);
+            return View(dhCart);
         }
 
         // POST: Cart/Edit/5
@@ -85,17 +85,17 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,user_id,quantity,price,product_id,created,updated")] dh_cart dh_cart)
+        public ActionResult Edit([Bind(Include = "id,user_id,quantity,price,product_id,created,updated")] dh_cart dhCart)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dh_cart).State = EntityState.Modified;
+                db.Entry(dhCart).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dh_cart.product_id);
-            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dh_cart.user_id);
-            return View(dh_cart);
+            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhCart.product_id);
+            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dhCart.user_id);
+            return View(dhCart);
         }
 
         // GET: Cart/Delete/5
@@ -105,12 +105,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_cart dh_cart = db.dh_cart.Find(id);
-            if (dh_cart == null)
+            dh_cart dhCart = db.dh_cart.Find(id);
+            if (dhCart == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_cart);
+            return View(dhCart);
         }
 
         // POST: Cart/Delete/5
@@ -118,8 +118,12 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            dh_cart dh_cart = db.dh_cart.Find(id);
-            db.dh_cart.Remove(dh_cart);
+            dh_cart dhCart = db.dh_cart.Find(id);
+            if (dhCart == null)
+            {
+                return RedirectToAction("Index");    
+            }
+            db.dh_cart.Remove(dhCart);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -354,3 +354,4 @@ bin/
 obj/
 NongSanShop/Web.config
 NongSanShop/wwwroot/uploads/
+NongSanShop/App_Data/log/

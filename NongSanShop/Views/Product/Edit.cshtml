@@ -55,6 +55,8 @@
                     @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
                 </div>
             </div>
+            
+            @Html.HiddenFor(model => model.avatar)
 
             <div class="form-group">
                 <label class="control-label col-md-2">Hình ảnh</label>
