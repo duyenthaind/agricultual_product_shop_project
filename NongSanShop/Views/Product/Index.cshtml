@@ -91,10 +91,16 @@
                                     @Html.DisplayFor(modelItem => item.avatar)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.created)
+                                    @{
+                                        var timeStampCreated = item.created;
+                                        @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampCreated.GetValueOrDefault()).ToString())
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.updated)
+                                    @{
+                                        var timeStampUpdated = item.updated;
+                                        @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampUpdated.GetValueOrDefault()).ToString());
+                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.id }) |

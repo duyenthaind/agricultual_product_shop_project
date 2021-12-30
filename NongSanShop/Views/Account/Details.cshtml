@@ -71,7 +71,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.created)
+                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString())
             </dd>
 
             <dt>
@@ -79,7 +79,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.updated)
+                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString())
             </dd>
 
         </dl>

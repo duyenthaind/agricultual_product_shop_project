@@ -6,12 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
+using log4net.Core;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
     public class ProductController : Controller
     {
+        private static readonly ILog Logger = LogManager.GetLogger(nameof(ProductController));
+        
         private NongSanDB db = new NongSanDB();
 
         // GET: Product
@@ -28,12 +32,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_product dh_product = db.dh_product.Find(id);
-            if (dh_product == null)
+            dh_product dhProduct = db.dh_product.Find(id);
+            if (dhProduct == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_product);
+            return View(dhProduct);
         }
 
         // GET: Product/Create
@@ -48,32 +52,34 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,description,price,quantity,category_id,avatar,created,updated")] dh_product dh_product)
+        public ActionResult Create([Bind(Include = "id,name,description,price,quantity,category_id,avatar,created,updated")] dh_product dhProduct)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dh_product.avatar = "";
+                    dhProduct.avatar = "";
                     var f = Request.Files["ImageFile"];
                     if (f != null && f.ContentLength > 0)
                     {
                         string FileName = System.IO.Path.GetFileName(f.FileName);
                         string UploadPath = Server.MapPath("~/wwwroot/uploads/products/" + FileName);
                         f.SaveAs(UploadPath);
-                        dh_product.avatar = FileName;
+                        dhProduct.avatar = FileName;
                     }
-                    db.dh_product.Add(dh_product);
+
+                    dhProduct.created = DateTimeOffset.Now.ToUnixTimeSeconds();
+                    db.dh_product.Add(dhProduct);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(dh_product);
+                return View(dhProduct);
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập liệu" + ex.Message;
-                ViewBag.category_id = new SelectList(db.dh_category, "id", "name", dh_product.category_id);
-                return View(dh_product);
+                ViewBag.category_id = new SelectList(db.dh_category, "id", "name", dhProduct.category_id);
+                return View(dhProduct);
             }
         }
 
@@ -84,13 +90,13 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_product dh_product = db.dh_product.Find(id);
-            if (dh_product == null)
+            dh_product dhProduct = db.dh_product.Find(id);
+            if (dhProduct == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.category_id = new SelectList(db.dh_category, "id", "name", dh_product.category_id);
-            return View(dh_product);
+            ViewBag.category_id = new SelectList(db.dh_category, "id", "name", dhProduct.category_id);
+            return View(dhProduct);
         }
 
         // POST: Product/Edit/5
@@ -98,7 +104,7 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,description,price,quantity,category_id,avatar,created,updated")] dh_product dh_product)
+        public ActionResult Edit([Bind(Include = "id,name,description,price,quantity,category_id,avatar,created,updated")] dh_product dhProduct)
         {
             try
             {
@@ -110,19 +116,22 @@ namespace NongSanShop.Controllers
                         string FileName = System.IO.Path.GetFileName(f.FileName);
                         string UploadPath = Server.MapPath("~/wwwroot/uploads/products/" + FileName);
                         f.SaveAs(UploadPath);
-                        dh_product.avatar = FileName;
+                        dhProduct.avatar = FileName;
                     }
-                    db.Entry(dh_product).State = EntityState.Modified;
+
+                    dhProduct.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
+                    db.Entry(dhProduct).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(dh_product);
+                return View(dhProduct);
             }
             catch(Exception ex)
             {
+                Logger.Error($"Edit product with id {dhProduct.id} error ", ex);
                 ViewBag.Error = "Lỗi nhập liệu" + ex.Message;
-                ViewBag.category_id = new SelectList(db.dh_category, "id", "name", dh_product.category_id);
-                return View(dh_product);
+                ViewBag.category_id = new SelectList(db.dh_category, "id", "name", dhProduct.category_id);
+                return View(dhProduct);
             }
 
 
@@ -135,12 +144,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_product dh_product = db.dh_product.Find(id);
-            if (dh_product == null)
+            dh_product dhProduct = db.dh_product.Find(id);
+            if (dhProduct == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_product);
+            return View(dhProduct);
         }
 
         // POST: Product/Delete/5
@@ -148,17 +157,23 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            dh_product dh_product = db.dh_product.Find(id);
+            dh_product dhProduct = db.dh_product.Find(id);
+            if (dhProduct == null)
+            {
+                Logger.Info($"Find product with id {id} return null, redirect to index page");
+                return RedirectToAction("Index");
+            }
             try
             {
-                db.dh_product.Remove(dh_product);
+                db.dh_product.Remove(dhProduct);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch(Exception ex)
             {
+                Logger.Error($"Delete product record {id} error ", ex);
                 ViewBag.Error = "Không xoá bản ghi này!" + ex.Message;
-                return View("Delete", dh_product);
+                return View("Delete", dhProduct);
             }
 
         }

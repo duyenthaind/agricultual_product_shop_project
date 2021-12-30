@@ -6,12 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
     public class OrderController : Controller
     {
+
+        private static readonly ILog Logger = LogManager.GetLogger(nameof(OrderController));
+        
         private NongSanDB db = new NongSanDB();
 
         // GET: Order
@@ -28,12 +32,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_order dh_order = db.dh_order.Find(id);
-            if (dh_order == null)
+            dh_order dhOrder = db.dh_order.Find(id);
+            if (dhOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_order);
+            return View(dhOrder);
         }
 
         // GET: Order/Create
@@ -48,17 +52,18 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,user_id,address,name,email,code_name,status,created,updated")] dh_order dh_order)
+        public ActionResult Create([Bind(Include = "id,user_id,address,name,email,code_name,status,created,updated")] dh_order dhOrder)
         {
             if (ModelState.IsValid)
             {
-                db.dh_order.Add(dh_order);
+                dhOrder.created = DateTimeOffset.Now.ToUnixTimeSeconds();
+                db.dh_order.Add(dhOrder);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dh_order.user_id);
-            return View(dh_order);
+            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dhOrder.user_id);
+            return View(dhOrder);
         }
 
         // GET: Order/Edit/5
@@ -68,13 +73,13 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_order dh_order = db.dh_order.Find(id);
-            if (dh_order == null)
+            dh_order dhOrder = db.dh_order.Find(id);
+            if (dhOrder == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dh_order.user_id);
-            return View(dh_order);
+            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dhOrder.user_id);
+            return View(dhOrder);
         }
 
         // POST: Order/Edit/5
@@ -82,16 +87,17 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,user_id,address,name,email,code_name,status,created,updated")] dh_order dh_order)
+        public ActionResult Edit([Bind(Include = "id,user_id,address,name,email,code_name,status,created,updated")] dh_order dhOrder)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dh_order).State = EntityState.Modified;
+                dhOrder.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
+                db.Entry(dhOrder).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dh_order.user_id);
-            return View(dh_order);
+            ViewBag.user_id = new SelectList(db.dh_user, "id", "username", dhOrder.user_id);
+            return View(dhOrder);
         }
 
         // GET: Order/Delete/5
@@ -101,12 +107,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_order dh_order = db.dh_order.Find(id);
-            if (dh_order == null)
+            dh_order dhOrder = db.dh_order.Find(id);
+            if (dhOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_order);
+            return View(dhOrder);
         }
 
         // POST: Order/Delete/5
@@ -114,8 +120,13 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            dh_order dh_order = db.dh_order.Find(id);
-            db.dh_order.Remove(dh_order);
+            dh_order dhOrder = db.dh_order.Find(id);
+            if (dhOrder == null)
+            {
+                Logger.Info($"Find order with id {id} return result null, redirect to index page");
+                return RedirectToAction("Index");
+            }
+            db.dh_order.Remove(dhOrder);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

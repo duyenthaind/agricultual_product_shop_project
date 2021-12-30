@@ -9,7 +9,7 @@
 
 <div>
     <h4>dh_order</h4>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.dh_user.username)
@@ -64,7 +64,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.created)
+            @{
+                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString())
+            }
         </dd>
 
         <dt>
@@ -72,12 +74,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.updated)
+            @{
+                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString())
+            }
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new {id = Model.id}) |
     @Html.ActionLink("Back to List", "Index")
 </p>

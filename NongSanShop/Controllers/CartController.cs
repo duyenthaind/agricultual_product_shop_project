@@ -6,12 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
     public class CartController : Controller
     {
+
+        private static readonly ILog Logger = LogManager.GetLogger(nameof(CartController));
+        
         private NongSanDB db = new NongSanDB();
 
         // GET: Cart
@@ -53,6 +57,7 @@ namespace NongSanShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                dhCart.created = DateTimeOffset.Now.ToUnixTimeSeconds();
                 db.dh_cart.Add(dhCart);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,6 +94,7 @@ namespace NongSanShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                dhCart.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
                 db.Entry(dhCart).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -121,6 +127,7 @@ namespace NongSanShop.Controllers
             dh_cart dhCart = db.dh_cart.Find(id);
             if (dhCart == null)
             {
+                Logger.Info($"Find cart id {id} return empty result ");
                 return RedirectToAction("Index");    
             }
             db.dh_cart.Remove(dhCart);

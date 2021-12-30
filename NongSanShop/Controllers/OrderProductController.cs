@@ -6,12 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
     public class OrderProductController : Controller
     {
+        
+        private static readonly ILog Logger = LogManager.GetLogger(nameof(OrderProductController));
+        
         private NongSanDB db = new NongSanDB();
 
         // GET: OrderProduct
@@ -28,12 +32,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_order_product dh_order_product = db.dh_order_product.Find(id);
-            if (dh_order_product == null)
+            dh_order_product dhOrderProduct = db.dh_order_product.Find(id);
+            if (dhOrderProduct == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_order_product);
+            return View(dhOrderProduct);
         }
 
         // GET: OrderProduct/Create
@@ -49,18 +53,18 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,order_id,product_id,price,quantity")] dh_order_product dh_order_product)
+        public ActionResult Create([Bind(Include = "id,order_id,product_id,price,quantity")] dh_order_product dhOrderProduct)
         {
             if (ModelState.IsValid)
             {
-                db.dh_order_product.Add(dh_order_product);
+                db.dh_order_product.Add(dhOrderProduct);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dh_order_product.order_id);
-            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dh_order_product.product_id);
-            return View(dh_order_product);
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dhOrderProduct.order_id);
+            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhOrderProduct.product_id);
+            return View(dhOrderProduct);
         }
 
         // GET: OrderProduct/Edit/5
@@ -70,14 +74,14 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_order_product dh_order_product = db.dh_order_product.Find(id);
-            if (dh_order_product == null)
+            dh_order_product dhOrderProduct = db.dh_order_product.Find(id);
+            if (dhOrderProduct == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dh_order_product.order_id);
-            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dh_order_product.product_id);
-            return View(dh_order_product);
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dhOrderProduct.order_id);
+            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhOrderProduct.product_id);
+            return View(dhOrderProduct);
         }
 
         // POST: OrderProduct/Edit/5
@@ -85,17 +89,17 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,order_id,product_id,price,quantity")] dh_order_product dh_order_product)
+        public ActionResult Edit([Bind(Include = "id,order_id,product_id,price,quantity")] dh_order_product dhOrderProduct)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dh_order_product).State = EntityState.Modified;
+                db.Entry(dhOrderProduct).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dh_order_product.order_id);
-            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dh_order_product.product_id);
-            return View(dh_order_product);
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dhOrderProduct.order_id);
+            ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhOrderProduct.product_id);
+            return View(dhOrderProduct);
         }
 
         // GET: OrderProduct/Delete/5
@@ -105,12 +109,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_order_product dh_order_product = db.dh_order_product.Find(id);
-            if (dh_order_product == null)
+            dh_order_product dhOrderProduct = db.dh_order_product.Find(id);
+            if (dhOrderProduct == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_order_product);
+            return View(dhOrderProduct);
         }
 
         // POST: OrderProduct/Delete/5
@@ -118,8 +122,13 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            dh_order_product dh_order_product = db.dh_order_product.Find(id);
-            db.dh_order_product.Remove(dh_order_product);
+            dh_order_product dhOrderProduct = db.dh_order_product.Find(id);
+            if (dhOrderProduct == null)
+            {
+                Logger.Info($"Find order product id  {id} return result null, redirect to index page");
+                return RedirectToAction("Index");
+            }
+            db.dh_order_product.Remove(dhOrderProduct);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

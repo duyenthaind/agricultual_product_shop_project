@@ -74,10 +74,10 @@
                                     @Html.DisplayFor(modelItem => item.role)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.created)
+                                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(item.created.GetValueOrDefault()).ToString())
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.updated)
+                                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(item.updated.GetValueOrDefault()).ToString())
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.id }) |
