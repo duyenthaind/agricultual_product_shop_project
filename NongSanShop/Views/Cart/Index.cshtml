@@ -1,13 +1,14 @@
 ﻿@using NongSanShop.Common
-@model IEnumerable<NongSanShop.Models.dh_category>
+@model IEnumerable<NongSanShop.Models.dh_cart>
 
 @{
-    ViewBag.Title = "Danh mục";
+    ViewBag.Title = "Gio hàng";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Danh mục</h3>
+    <h3 class="text-dark mb-4">Giỏ hàng</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">
@@ -37,13 +38,16 @@
                     <thead>
                         <tr>
                             <th>
-                                Hình ảnh
+                                Tên sản phẩm
                             </th>
                             <th>
-                                Tên danh mục
+                                Tên người dùng
                             </th>
                             <th>
-                                Mô tả
+                                Số lượng
+                            </th>
+                            <th>
+                                Giá
                             </th>
                             <th>
                                 Thời gian tạo
@@ -59,18 +63,16 @@
                         {
                             <tr>
                                 <td>
-                                    @{
-                                        string imgPath = "~/wwwroot/uploads/categories/" + item.avatar;
-                                    }
-                                    <img src="@Url.Content(imgPath)" width="100" />
-                                    <br />
-                                    @Html.DisplayFor(modelItem => item.avatar)
+                                    @Html.DisplayFor(modelItem => item.dh_product.name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.name)
+                                    @Html.DisplayFor(modelItem => item.dh_user.name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.description)
+                                    @Html.DisplayFor(modelItem => item.quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.price)
                                 </td>
                                 <td>
                                     @{
@@ -100,17 +102,22 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Hình ảnh
+                                    Tên sản phẩm
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Tên danh mục
+                                    Tên người dùng
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Mô tả
+                                    Số lượng
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Giá
                                 </strong>
                             </td>
                             <td>

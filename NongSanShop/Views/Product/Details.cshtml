@@ -1,83 +1,96 @@
-﻿@model NongSanShop.Models.dh_product
+﻿@using NongSanShop.Common
+@model NongSanShop.Models.dh_product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Sản phẩm";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container-fluid">
+    <div>
+        <h4>dh_product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên danh mục
+            </dt>
 
-<div>
-    <h4>dh_product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dh_category.name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.dh_category.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dh_category.name)
-        </dd>
+            <dt>
+                Tên sản phẩm
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+            <dt>
+                Mô tả
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+            <dt>
+                Giá
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.price)
-        </dd>
+            <dt>
+                Số lượng
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.quantity)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.quantity)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.quantity)
-        </dd>
+            <dt>
+                Hình ảnh
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.avatar)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.avatar)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.avatar)
-        </dd>
+            <dt>
+                Thời gian tạo
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.created)
-        </dt>
+            <dd>
+                @{
+                    if (Model.created.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.created)
-        </dd>
+            <dt>
+                Thời gian cập nhật
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.updated)
-        </dt>
+            <dd>
+                @{
+                    if (Model.updated.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.updated)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

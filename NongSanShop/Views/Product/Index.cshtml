@@ -1,13 +1,14 @@
-﻿@model IEnumerable<NongSanShop.Models.dh_product>
+﻿@using NongSanShop.Common
+@model IEnumerable<NongSanShop.Models.dh_product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sản phẩm";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Category</h3>
+    <h3 class="text-dark mb-4">Sản phẩm</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">
@@ -19,7 +20,7 @@
                 <div class="col-md-6 text-nowrap">
                     <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
                         <label>
-                            Show&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm">
+                            Hiển thị&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm">
                                 <option value="10" selected="">10</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
@@ -29,7 +30,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Tìm kiếm"></label></div>
                 </div>
             </div>
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -37,28 +38,28 @@
                     <thead>
                         <tr>
                             <th>
-                                Category
+                                Tên danh mục
                             </th>
                             <th>
-                                Name
+                                Tên sản phẩm
                             </th>
                             <th>
-                                Description
+                                Mô tả
                             </th>
                             <th>
-                                Price
+                                Giá
                             </th>
                             <th>
-                                Quantity
+                                Số lượng
                             </th>
                             <th>
-                                Avatar
+                                Hình ảnh
                             </th>
                             <th>
-                                Created
+                                Thời gian tạo
                             </th>
                             <th>
-                                Updated
+                                Thời gian cập nhật
                             </th>
                             <th></th>
                         </tr>
@@ -91,15 +92,25 @@
                                     @Html.DisplayFor(modelItem => item.avatar)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.created)
+                                    @{
+                                        if (item.created.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.updated)
+                                    @{
+                                        if (item.updated.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
+                                    }
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.id }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.id })
                                 </td>
                             </tr>
                         }
@@ -108,42 +119,42 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Category
+                                    Tên danh mục
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Name
+                                    Tên sản phẩm
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Description
+                                    Mô tả
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Price
+                                    Giá
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Quantity
+                                    Số lượng
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Avatar
+                                    Hình ảnh
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Created
+                                    Thời gian tạo
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Updated
+                                    Thời gian cập nhật
                                 </strong>
                             </td>
                             <td></td>

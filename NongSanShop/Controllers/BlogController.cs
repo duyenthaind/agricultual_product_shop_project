@@ -6,12 +6,15 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
     public class BlogController : Controller
     {
+        private static readonly ILog Logger = LogManager.GetLogger(nameof(BlogController));
+
         private NongSanDB db = new NongSanDB();
 
         // GET: Blog
@@ -27,12 +30,14 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_blog dh_blog = db.dh_blog.Find(id);
-            if (dh_blog == null)
+
+            dh_blog dhBlog = db.dh_blog.Find(id);
+            if (dhBlog == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_blog);
+
+            return View(dhBlog);
         }
 
         // GET: Blog/Create
@@ -46,25 +51,26 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,thumbnail,content,created,updated")] dh_blog dh_blog)
+        public ActionResult Create([Bind(Include = "id,thumbnail,content,created,updated")] dh_blog dhBlog)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.dh_blog.Add(dh_blog);
+                    dhBlog.created = DateTimeOffset.Now.ToUnixTimeSeconds();
+                    db.dh_blog.Add(dhBlog);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(dh_blog);
+
+                return View(dhBlog);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập dữ liệu !" + ex.Message;
-                return View(dh_blog);
+                Logger.Error("Create new blog error, ", ex);
+                return View(dhBlog);
             }
-
-
         }
 
         // GET: Blog/Edit/5
@@ -74,12 +80,14 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_blog dh_blog = db.dh_blog.Find(id);
-            if (dh_blog == null)
+
+            dh_blog dhBlog = db.dh_blog.Find(id);
+            if (dhBlog == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_blog);
+
+            return View(dhBlog);
         }
 
         // POST: Blog/Edit/5
@@ -87,24 +95,26 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,thumbnail,content,created,updated")] dh_blog dh_blog)
+        public ActionResult Edit([Bind(Include = "id,thumbnail,content,created,updated")] dh_blog dhBlog)
         {
-            try 
+            try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(dh_blog).State = EntityState.Modified;
+                    dhBlog.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
+                    db.Entry(dhBlog).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(dh_blog);
+
+                return View(dhBlog);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập dữ liệu !" + ex.Message;
-                return View(dh_blog);
+                Logger.Error($"Edit blog with id {dhBlog.id} error", ex);
+                return View(dhBlog);
             }
-
         }
 
         // GET: Blog/Delete/5
@@ -114,12 +124,14 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_blog dh_blog = db.dh_blog.Find(id);
-            if (dh_blog == null)
+
+            dh_blog dhBlog = db.dh_blog.Find(id);
+            if (dhBlog == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_blog);
+
+            return View(dhBlog);
         }
 
         // POST: Blog/Delete/5
@@ -127,19 +139,26 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            dh_blog dh_blog = db.dh_blog.Find(id);
-            try
+            dh_blog dhBlog = db.dh_blog.Find(id);
+            if (dhBlog == null)
             {
-                db.dh_blog.Remove(dh_blog);
-                db.SaveChanges();
+                Logger.Info($"Find record blog with id {id}, result not found, route user to controller home page");
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
-            {
-                ViewBag.Error = "Không xoá bản ghi này!" + ex.Message;
-                return View("Delete", dh_blog);
-            }
 
+            try
+            {
+                db.dh_blog.Remove(dhBlog);
+                db.SaveChanges();
+                Logger.Info($"Deleted blog with id : {id}");
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Delete log record id {id} error", ex);
+                ViewBag.Error = "Không xoá bản ghi này!" + ex.Message;
+                return View("Delete", dhBlog);
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -148,6 +167,7 @@ namespace NongSanShop.Controllers
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

@@ -1,0 +1,51 @@
+﻿@model NongSanShop.Models.dh_order_product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>dh_order_product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dh_order.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dh_order.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dh_product.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dh_product.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

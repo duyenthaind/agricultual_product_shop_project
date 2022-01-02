@@ -1,13 +1,14 @@
 ﻿@using NongSanShop.Common
-@model IEnumerable<NongSanShop.Models.dh_category>
+@model IEnumerable<NongSanShop.Models.dh_order>
 
 @{
-    ViewBag.Title = "Danh mục";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Danh mục</h3>
+    <h3 class="text-dark mb-4">Đơn hàng</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">
@@ -37,13 +38,22 @@
                     <thead>
                         <tr>
                             <th>
-                                Hình ảnh
+                                Tên tài khoản
                             </th>
                             <th>
-                                Tên danh mục
+                                Địa chỉ
                             </th>
                             <th>
-                                Mô tả
+                                Tên người dùng
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Code đơn hàng
+                            </th>
+                            <th>
+                                Trạng thái
                             </th>
                             <th>
                                 Thời gian tạo
@@ -59,18 +69,22 @@
                         {
                             <tr>
                                 <td>
-                                    @{
-                                        string imgPath = "~/wwwroot/uploads/categories/" + item.avatar;
-                                    }
-                                    <img src="@Url.Content(imgPath)" width="100" />
-                                    <br />
-                                    @Html.DisplayFor(modelItem => item.avatar)
+                                    @Html.DisplayFor(modelItem => item.dh_user.username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.address)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.description)
+                                    @Html.DisplayFor(modelItem => item.email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.code_name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
                                 </td>
                                 <td>
                                     @{
@@ -100,17 +114,32 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Hình ảnh
+                                    Tên tài khoản
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Tên danh mục
+                                    Địa chỉ
                                 </strong>
                             </td>
                             <td>
                                 <strong>
-                                    Mô tả
+                                    Tên người dùng
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Email
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Code đơn hàng
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Trạng thái
                                 </strong>
                             </td>
                             <td>
@@ -147,3 +176,4 @@
         </div>
     </div>
 </div>
+

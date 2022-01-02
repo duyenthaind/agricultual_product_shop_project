@@ -11,11 +11,11 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>dh_category</h4>
+            <h4>Thêm mới</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Tên danh mục</label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -23,15 +23,15 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Mô tả</label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.created, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="form-group">
+                <label class="control-label col-md-2">Thời gian tạo</label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.created, "", new { @class = "text-danger" })
@@ -39,27 +39,28 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.updated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Thời gian cập nhật</label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.updated, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.updated, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
-                @Html.LabelFor(model => model.avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Hình minh họa</label>
                 <div class="col-md-10">
                     <img id="output" alt="avatar" width="200" height="220" src="~/wwwroot/uploads/categories/no_avatar.png">
                     <p>
                         <label for="ufile" style="cursor:pointer">Chọn file ảnh</label>
                         <input id="ufile" name="ImageFile" type="file" style="display:none;" onchange="loadFile(event)" />
+                        @Html.HiddenFor(model => model.avatar, new { htmlAttributes = new { @class = "form-control" } })
                     </p>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Thêm" class="btn btn-success" />
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 ﻿@using NongSanShop.Common
-@model NongSanShop.Models.dh_category
+@model NongSanShop.Models.dh_cart
 
 @{
     ViewBag.Title = "Details";
@@ -8,23 +8,39 @@
 
 <div class="container-fluid">
     <div>
-        <h4>Chi tiết danh mục</h4>
+        <h4>Chi tiết</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                Tên danh mục
+                Tên sản phẩm
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.name)
+                @Html.DisplayFor(model => model.dh_product.name)
             </dd>
 
             <dt>
-                Mô tả
+                Tên người dùng
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.description)
+                @Html.DisplayFor(model => model.dh_user.name)
+            </dd>
+
+            <dt>
+                Số lượng
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.quantity)
+            </dd>
+
+            <dt>
+                Giá
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price)
             </dd>
 
             <dt>
@@ -51,19 +67,6 @@
                         @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
                     }
                 }
-            </dd>
-
-            <dt>
-                Hình ảnh minh họa
-            </dt>
-
-            <dd>
-                @{
-                    string imgPath = "~/wwwroot/uploads/categories/" + Model.avatar;
-                }
-                <img src="@Url.Content(imgPath)" width="400" />
-                <br />
-                @Html.DisplayFor(model => model.avatar)
             </dd>
 
         </dl>

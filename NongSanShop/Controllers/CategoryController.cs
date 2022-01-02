@@ -6,12 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
     public class CategoryController : Controller
     {
+
+        private static readonly ILog Logger = LogManager.GetLogger(nameof(CategoryController));
+        
         private NongSanDB db = new NongSanDB();
 
         // GET: Category
@@ -27,12 +31,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_category dh_category = db.dh_category.Find(id);
-            if (dh_category == null)
+            dh_category dhCategory = db.dh_category.Find(id);
+            if (dhCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_category);
+            return View(dhCategory);
         }
 
         // GET: Category/Create
@@ -46,31 +50,31 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,description,created,updated,avatar")] dh_category dh_category)
+        public ActionResult Create([Bind(Include = "id,name,description,created,updated,avatar")] dh_category dhCategory)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dh_category.avatar = "";
+                    dhCategory.avatar = "";
+                    dhCategory.created = DateTimeOffset.Now.ToUnixTimeSeconds();
                     var f = Request.Files["ImageFile"];
                     if (f != null && f.ContentLength > 0)
                     {
                         string FileName = System.IO.Path.GetFileName(f.FileName);
                         string UploadPath = Server.MapPath("~/wwwroot/uploads/categories/" + FileName);
                         f.SaveAs(UploadPath);
-                        dh_category.avatar = FileName;
+                        dhCategory.avatar = FileName;
                     }
-                    db.dh_category.Add(dh_category);
+                    db.dh_category.Add(dhCategory);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
                 }
-                return View(dh_category);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập liệu" + ex.Message;
-                return View(dh_category);
+                return View(dhCategory);
             }
         }
 
@@ -81,12 +85,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_category dh_category = db.dh_category.Find(id);
-            if (dh_category == null)
+            dh_category dhCategory = db.dh_category.Find(id);
+            if (dhCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_category);
+            return View(dhCategory);
         }
 
         // POST: Category/Edit/5
@@ -94,30 +98,30 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,description,created,updated,avatar")] dh_category dh_category)
+        public ActionResult Edit([Bind(Include = "id,name,description,created,updated,avatar")] dh_category dhCategory)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    dhCategory.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
                     var f = Request.Files["ImageFile"];
                     if (f != null && f.ContentLength > 0)
                     {
                         string FileName = System.IO.Path.GetFileName(f.FileName);
                         string UploadPath = Server.MapPath("~/wwwroot/uploads/categories/" + FileName);
                         f.SaveAs(UploadPath);
-                        dh_category.avatar = FileName;
+                        dhCategory.avatar = FileName;
                     }
-                    db.Entry(dh_category).State = EntityState.Modified;
+                    db.Entry(dhCategory).State = EntityState.Modified;
                     db.SaveChanges();
-                return RedirectToAction("Index");
                 }
-                return View(dh_category);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập liệu" + ex.Message;
-                return View(dh_category);
+                return View(dhCategory);
             }
         }
 
@@ -128,12 +132,12 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            dh_category dh_category = db.dh_category.Find(id);
-            if (dh_category == null)
+            dh_category dhCategory = db.dh_category.Find(id);
+            if (dhCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(dh_category);
+            return View(dhCategory);
         }
 
         // POST: Category/Delete/5
@@ -141,17 +145,23 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            dh_category dh_category = db.dh_category.Find(id);
+            dh_category dhCategory = db.dh_category.Find(id);
+            if (dhCategory == null)
+            {
+                Logger.Info($"Find category with id {id} return result null, redirect to index page ");
+                return RedirectToAction("Index");
+            }
             try
             {
-                db.dh_category.Remove(dh_category);
+                db.dh_category.Remove(dhCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
+                Logger.Error($"Delete record {id} error ", ex);
                 ViewBag.Error = "Không được xóa bản ghi này" + ex.Message;
-                return View("Delete", dh_category);
+                return View("Delete", dhCategory);
             }
         }
 

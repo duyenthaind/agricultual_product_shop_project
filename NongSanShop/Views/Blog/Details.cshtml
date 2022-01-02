@@ -1,51 +1,64 @@
-﻿@model NongSanShop.Models.dh_blog
+﻿@using NongSanShop.Common
+@model NongSanShop.Models.dh_blog
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Bài viết";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container-fluid">
+    <div>
+        <h4>Chi tiết</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tiêu đề
+            </dt>
 
-<div>
-    <h4>dh_blog</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.thumbnail)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.thumbnail)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.thumbnail)
-        </dd>
+            <dt>
+                Nội dung
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.content)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.content)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.content)
-        </dd>
+            <dt>
+                Thời gian tạo
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.created)
-        </dt>
+            <dd>
+                @{
+                    if (Model.created.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.created)
-        </dd>
+            <dt>
+                Thời gian cập nhật
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.updated)
-        </dt>
+            <dd>
+                @{
+                    if (Model.updated.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.updated)
-        </dd>
-
-    </dl>
+        </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>
+</div>
+
+
