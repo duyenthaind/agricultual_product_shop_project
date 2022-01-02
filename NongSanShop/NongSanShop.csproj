@@ -134,6 +134,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Configuration\Attribute\SkipActionAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -143,9 +144,17 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderProductController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="CustomException\AuthorizationException.cs" />
+    <Compile Include="Filters\AdminAuthorizationFilter.cs" />
+    <Compile Include="Filters\UserAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Custom\AppRole.cs" />
+    <Compile Include="Models\Custom\AppUser.cs" />
+    <Compile Include="Models\Custom\Builder\AppUserBuilder.cs" />
+    <Compile Include="Models\Custom\Builder\ModelBuilder.cs" />
+    <Compile Include="Models\Custom\Enums\ERole.cs" />
     <Compile Include="Models\dh_blog.cs" />
     <Compile Include="Models\dh_cart.cs" />
     <Compile Include="Models\dh_category.cs" />
@@ -155,6 +164,7 @@
     <Compile Include="Models\dh_user.cs" />
     <Compile Include="Models\NongSanDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\HMac256Helper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

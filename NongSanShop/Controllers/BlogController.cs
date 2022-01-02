@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
+using NongSanShop.Filters;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
+    [AdminAuthorizationFilter]
     public class BlogController : Controller
     {
         private static readonly ILog Logger = LogManager.GetLogger(nameof(BlogController));
