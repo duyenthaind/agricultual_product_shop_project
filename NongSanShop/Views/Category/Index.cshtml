@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NongSanShop.Models.dh_category>
+﻿@using NongSanShop.Common
+@model IEnumerable<NongSanShop.Models.dh_category>
 
 @{
     ViewBag.Title = "Danh mục";
@@ -73,14 +74,18 @@
                                 </td>
                                 <td>
                                     @{
-                                        var timeStampCreated = item.created;
-                                        @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampCreated.GetValueOrDefault()).ToString())
+                                        if (item.created.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
                                     }
                                 </td>
                                 <td>
                                     @{
-                                        var timeStampUpdated = item.updated;
-                                        @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampUpdated.GetValueOrDefault()).ToString())
+                                        if (item.updated.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
                                     }
                                 </td>
                                 <td>

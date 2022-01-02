@@ -1,4 +1,5 @@
-﻿@model NongSanShop.Models.dh_cart
+﻿@using NongSanShop.Common
+@model NongSanShop.Models.dh_cart
 
 @{
     ViewBag.Title = "Details";
@@ -48,8 +49,10 @@
 
             <dd>
                 @{
-                    var timeStampCreated = Model.created;                    
-                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampCreated.GetValueOrDefault()).ToString())
+                    if (Model.created.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
                 }
             </dd>
 
@@ -59,8 +62,10 @@
 
             <dd>
                 @{
-                    var timeStampUpdated = Model.updated;
-                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampUpdated.GetValueOrDefault()).ToString())
+                    if (Model.updated.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
                 }
             </dd>
 

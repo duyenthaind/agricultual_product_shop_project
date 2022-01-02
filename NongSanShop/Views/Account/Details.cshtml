@@ -1,4 +1,5 @@
-﻿@model NongSanShop.Models.dh_user
+﻿@using NongSanShop.Common
+@model NongSanShop.Models.dh_user
 
 @{
     ViewBag.Title = "Details";
@@ -71,7 +72,12 @@
             </dt>
 
             <dd>
-                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString())
+                @{
+                    if (Model.created.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
             </dd>
 
             <dt>
@@ -79,7 +85,12 @@
             </dt>
 
             <dd>
-                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString())
+                @{
+                    if (Model.updated.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
             </dd>
 
         </dl>

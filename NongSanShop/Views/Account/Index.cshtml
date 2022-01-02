@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NongSanShop.Models.dh_user>
+﻿@using NongSanShop.Common
+@model IEnumerable<NongSanShop.Models.dh_user>
 
 @{
     ViewBag.Title = "Tài khoản";
@@ -74,10 +75,20 @@
                                     @Html.DisplayFor(modelItem => item.role)
                                 </td>
                                 <td>
-                                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(item.created.GetValueOrDefault()).ToString())
+                                    @{
+                                        if (item.created.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
+                                    }
                                 </td>
                                 <td>
-                                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(item.updated.GetValueOrDefault()).ToString())
+                                    @{
+                                        if (item.updated.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
+                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.id }) |

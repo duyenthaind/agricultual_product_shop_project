@@ -1,82 +1,179 @@
-﻿@model IEnumerable<NongSanShop.Models.dh_order>
+﻿@using NongSanShop.Common
+@model IEnumerable<NongSanShop.Models.dh_order>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.dh_user.username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.code_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.updated)
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Đơn hàng</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                @Html.ActionLink("Thêm mới", "Create")
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 text-nowrap">
+                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                        <label>
+                            Hiển thị&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm">
+                                <option value="10" selected="">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>&nbsp;
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Tìm kiếm"></label></div>
+                </div>
+            </div>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên tài khoản
+                            </th>
+                            <th>
+                                Địa chỉ
+                            </th>
+                            <th>
+                                Tên người dùng
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Code đơn hàng
+                            </th>
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th>
+                                Thời gian tạo
+                            </th>
+                            <th>
+                                Thời gian cập nhật
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dh_user.username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.code_name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.status)
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.created.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.updated.GetValueOrDefault() > 0)
+                                        {
+                                            @DateTimeOffset.FromUnixTimeSeconds(item.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.id }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.id })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <strong>
+                                    Tên tài khoản
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Địa chỉ
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Tên người dùng
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Email
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Code đơn hàng
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Trạng thái
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Thời gian tạo
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    Thời gian cập nhật
+                                </strong>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                </div>
+                <div class="col-md-6">
+                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.dh_user.username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.code_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.status)
-        </td>
-        <td>
-            @{
-                var timeStampCreated = item.created;
-                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampCreated.GetValueOrDefault()).ToString())
-            }
-        </td>
-        <td>
-            @{
-                var timeStampUpdated = item.updated;
-                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampUpdated.GetValueOrDefault()).ToString())
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>

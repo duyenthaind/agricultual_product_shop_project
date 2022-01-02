@@ -1,4 +1,5 @@
-﻿@model NongSanShop.Models.dh_blog
+﻿@using NongSanShop.Common
+@model NongSanShop.Models.dh_blog
 
 @{
     ViewBag.Title = "Bài viết";
@@ -30,9 +31,12 @@
                 Thời gian tạo
             </dt>
 
-            <dd>@{
-                    var timeStampCreated = Model.created;
-                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampCreated.GetValueOrDefault()).ToString("MM/dd/yyyy"))
+            <dd>
+                @{
+                    if (Model.created.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
                 }
             </dd>
 
@@ -42,17 +46,19 @@
 
             <dd>
                 @{
-                    var timeStampUpdated = Model.updated;
-                    @Html.Display(DateTimeOffset.FromUnixTimeSeconds(timeStampUpdated.GetValueOrDefault()).ToString("MM/dd/yyyy"))
+                    if (Model.updated.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
                 }
             </dd>
 
         </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Quay lại", "Index")
-    </p>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>
 </div>
 
 

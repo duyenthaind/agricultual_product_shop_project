@@ -10,50 +10,52 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Sửa</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.id)
+    <div class="form-horizontal">
+        <h4>Sửa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Tiêu đề</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.thumbnail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.thumbnail, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Nội dung</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.content, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            @*<div class="form-group">
-                <label class="control-label col-md-2">Thời gian tạo</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.created, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Thời gian cập nhật</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.updated, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.updated, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Lưu" class="btn btn-success" />
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Tiêu đề</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.thumbnail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.thumbnail, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nội dung</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2">Thời gian tạo</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.created, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Thời gian cập nhật</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.updated, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.updated, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @Html.HiddenFor(model => model.created)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
     }
 
     <div>

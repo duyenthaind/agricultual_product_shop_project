@@ -1,87 +1,95 @@
-﻿@model NongSanShop.Models.dh_order
+﻿@using NongSanShop.Common
+@model NongSanShop.Models.dh_order
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container-fluid">
+    <div>
+        <h4>Chi tiết</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên đăng nhập
+            </dt>
 
-<div>
-    <h4>dh_order</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dh_user.username)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.dh_user.username)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dh_user.username)
-        </dd>
+            <dt>
+                Địa chỉ
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.address)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
+            <dt>
+                Tên người dùng
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+            <dt>
+                Email
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+            <dt>
+                Code đơn hàng
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.code_name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.code_name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.code_name)
-        </dd>
+            <dt>
+                Trạng thái
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.status)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.status)
-        </dd>
+            <dt>
+                Thời gian tạo
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.created)
-        </dt>
+            <dd>
+                @{
+                    if (Model.created.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
+            </dd>
 
-        <dd>
-            @{
-                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.created.GetValueOrDefault()).ToString())
-            }
-        </dd>
+            <dt>
+                Thời gian cập nhật
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.updated)
-        </dt>
+            <dd>
+                @{
+                    if (Model.updated.GetValueOrDefault() > 0)
+                    {
+                        @DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString(Constants.DateTimePattern.DefaultDateTimePattern)
+                    }
+                }
+            </dd>
 
-        <dd>
-            @{
-                @Html.Display(DateTimeOffset.FromUnixTimeSeconds(Model.updated.GetValueOrDefault()).ToString())
-            }
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new {id = Model.id}) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

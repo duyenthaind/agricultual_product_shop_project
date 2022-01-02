@@ -72,21 +72,23 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Thời gian tạo</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.created, "", new { @class = "text-danger" })
+            @*<div class="form-group">
+                    <label class="control-label col-md-2">Thời gian tạo</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.created, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Tiêu gian cập nhật</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.updated, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.updated, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Tiêu gian cập nhật</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.updated, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.updated, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            @Html.HiddenFor(model => model.created)
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
