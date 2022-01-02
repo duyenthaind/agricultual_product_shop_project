@@ -7,10 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
+using NongSanShop.Filters;
 using NongSanShop.Models;
+using NongSanShop.Util;
 
 namespace NongSanShop.Controllers
 {
+    [AdminAuthorizationFilter]
     public class AccountController : Controller
     {
 
@@ -56,6 +59,8 @@ namespace NongSanShop.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var hashedPassword = HMac256Helper.HashPassword(dhUser.password, dhUser.username);
+                    dhUser.password = hashedPassword;
                     dhUser.created = DateTimeOffset.Now.ToUnixTimeSeconds();
                     db.dh_user.Add(dhUser);
                     db.SaveChanges();
@@ -100,6 +105,8 @@ namespace NongSanShop.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var hashedPassword = HMac256Helper.HashPassword(dhUser.password, dhUser.username);
+                    dhUser.password = hashedPassword;
                     dhUser.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
                     db.Entry(dhUser).State = EntityState.Modified;
                     db.SaveChanges();

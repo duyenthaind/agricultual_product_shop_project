@@ -4,7 +4,12 @@ namespace NongSanShop.Common
     {
         public static class DateTimePattern
         {
-            public static readonly string DefaultDateTimePattern = "dd/MM/yyyy";
+            public const string DefaultDateTimePattern = "dd/MM/yyyy";
+        }
+
+        public static class SessionItem
+        {
+            public const string User = "User";
         }
     }
 }
