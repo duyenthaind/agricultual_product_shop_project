@@ -144,6 +144,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\OrderProductController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserCartController.cs" />
     <Compile Include="CustomException\AuthorizationException.cs" />
     <Compile Include="Filters\AdminAuthorizationFilter.cs" />
     <Compile Include="Filters\UserAuthorizationFilter.cs" />
@@ -351,6 +352,11 @@
     <Content Include="Views\OrderProduct\Edit.cshtml" />
     <Content Include="Views\OrderProduct\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\UserCart\Create.cshtml" />
+    <Content Include="Views\UserCart\Delete.cshtml" />
+    <Content Include="Views\UserCart\Details.cshtml" />
+    <Content Include="Views\UserCart\Edit.cshtml" />
+    <Content Include="Views\UserCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
