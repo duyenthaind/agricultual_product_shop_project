@@ -19,13 +19,13 @@
                 @Html.DisplayFor(model => model.username)
             </dd>
 
-            <dt>
+            @*<dt>
                 Mật khẩu
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.password)
-            </dd>
+            </dd>*@
 
             <dt>
                 Tên người dùng
@@ -64,7 +64,22 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.role)
+                @{
+                    var role = Model.role;
+                    switch (role)
+                    {
+                        case 1:
+                            @Html.Label("USER");
+                            break;
+                        case 2:
+                            @Html.Label("ADMIN");
+                            break;
+                        default:
+                            @Html.Label("");
+                            break;
+                    }
+                }
+                @*@Html.DisplayFor(model => model.role)*@
             </dd>
 
             <dt>

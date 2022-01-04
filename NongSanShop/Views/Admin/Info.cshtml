@@ -1,4 +1,4 @@
-﻿
+﻿@model NongSanShop.Models.dh_user
 @{
     ViewBag.Title = "Info";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -46,40 +46,52 @@
                                 <p class="text-primary m-0 font-weight-bold">Thiết lập người dùng</p>
                             </div>
                             <div class="card-body">
-                                <form>
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.HiddenFor(model => model.id)
                                     <div class="form-row">
                                         <div class="col">
-                                            <div class="form-group"><label for="username"><strong>Tên tài khoản</strong></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group"><label for="email"><strong>Email</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
+                                            <div class="form-group"><label for="name"><strong>Họ và tên</strong></label><input class="form-control" type="text" id="name" value="@Html.DisplayFor(model => model.name)" name="name"></div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col">
-                                            <div class="form-group"><label for="first_name"><strong>Tên</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
+                                            <div class="form-group"><label for="email"><strong>Email</strong></label><input class="form-control" type="email" id="email" value="@Html.DisplayFor(model => model.email)" name="email"></div>
                                         </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="col">
-                                            <div class="form-group"><label for="last_name"><strong>Họ</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name"></div>
+                                            <div class="form-group"><label for="address"><strong>Địa chỉ</strong></label><input class="form-control" type="text" id="address" value="@Html.DisplayFor(model => model.address)" name="address"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><label for="phone"><strong>Số điện thoại</strong></label><input class="form-control" type="text" id="phone" value="@Html.DisplayFor(model => model.phone)" name="phone"></div>
                                         </div>
                                     </div>
                                     <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Lưu</button></div>
-                                </form>
+                                }
                             </div>
                         </div>
                         <div class="card shadow">
                             <div class="card-header py-3">
-                                <p class="text-primary m-0 font-weight-bold">Liên lạc</p>
+                                <p class="text-primary m-0 font-weight-bold">Đổi mật khẩu</p>
+
                             </div>
                             <div class="card-body">
                                 <form>
-                                    <div class="form-group"><label for="address"><strong>Địa chỉ</strong></label><input class="form-control" type="text" id="address" placeholder="" name="address"></div>
                                     <div class="form-row">
                                         <div class="col">
-                                            <div class="form-group"><label for="city"><strong>Thành phố</strong></label><input class="form-control" type="text" id="city" placeholder="" name="city"></div>
+                                            <div class="form-group"><label for="password"><strong>Mật khẩu cũ</strong></label><input class="form-control" type="password" id="password" value="@Html.DisplayFor(model=>model.password)" name="password"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Lưu</button></div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group"><label for="newpass"><strong>Mật khẩu mới</strong></label><input class="form-control" type="password" id="newpass" name="newpass"></div>
+                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>

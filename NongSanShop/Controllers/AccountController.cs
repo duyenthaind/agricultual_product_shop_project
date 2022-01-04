@@ -16,9 +16,8 @@ namespace NongSanShop.Controllers
     [AdminAuthorizationFilter]
     public class AccountController : Controller
     {
-
         private static readonly ILog Logger = LogManager.GetLogger(nameof(AccountController));
-        
+
         private NongSanDB db = new NongSanDB();
 
         // GET: Account
@@ -34,11 +33,13 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             dh_user dhUser = db.dh_user.Find(id);
             if (dhUser == null)
             {
                 return HttpNotFound();
             }
+
             return View(dhUser);
         }
 
@@ -53,7 +54,8 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,username,password,name,email,phone,address,role,created,updated")] dh_user dhUser)
+        public ActionResult Create(
+            [Bind(Include = "id,username,password,name,email,phone,address,role,created,updated")] dh_user dhUser)
         {
             try
             {
@@ -69,13 +71,12 @@ namespace NongSanShop.Controllers
 
                 return View(dhUser);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = "Lỗi nhập liệu" + ex.Message;
-                Logger.Error("Create new account error" , ex);
+                Logger.Error("Create new account error", ex);
                 return View(dhUser);
             }
-
         }
 
         // GET: Account/Edit/5
@@ -85,11 +86,13 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             dh_user dhUser = db.dh_user.Find(id);
             if (dhUser == null)
             {
                 return HttpNotFound();
             }
+
             return View(dhUser);
         }
 
@@ -98,20 +101,28 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,username,password,name,email,phone,address,role,created,updated")] dh_user dhUser)
+        public ActionResult Edit(
+            [Bind(Include = "id,username,password,name,email,phone,address,role,created,updated")] dh_user dhUser)
         {
-            
             try
             {
+                var oldPassword = db.dh_user.Where(p => p.id == dhUser.id)
+                    .Select(p => p.password).FirstOrDefault();
+
                 if (ModelState.IsValid)
                 {
-                    var hashedPassword = HMac256Helper.HashPassword(dhUser.password, dhUser.username);
-                    dhUser.password = hashedPassword;
+                    if (!dhUser.password.Equals(oldPassword))
+                    {
+                        var hashedPassword = HMac256Helper.HashPassword(dhUser.password, dhUser.username);
+                        dhUser.password = hashedPassword;
+                    }
+
                     dhUser.updated = DateTimeOffset.Now.ToUnixTimeSeconds();
                     db.Entry(dhUser).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+
                 return View(dhUser);
             }
             catch (Exception ex)
@@ -129,11 +140,13 @@ namespace NongSanShop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             dh_user dhUser = db.dh_user.Find(id);
             if (dhUser == null)
             {
                 return HttpNotFound();
             }
+
             return View(dhUser);
         }
 
@@ -148,18 +161,18 @@ namespace NongSanShop.Controllers
                 Logger.Info($"Find account {id} return result null, redirect to index page");
                 return RedirectToAction("Index");
             }
+
             try
             {
                 db.dh_user.Remove(dhUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = "Không được xóa bản ghi này" + ex.Message;
                 return View("Delete", dhUser);
             }
-
         }
 
         protected override void Dispose(bool disposing)
@@ -168,6 +181,7 @@ namespace NongSanShop.Controllers
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }
