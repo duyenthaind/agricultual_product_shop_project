@@ -34,7 +34,7 @@ namespace NongSanShop.Controllers
             dh_user info = null;
             if (Session[Constants.SessionItem.User] != null)
             {
-                string userName = ((AppUser)Session[Constants.SessionItem.User]).Username.ToString();
+                string userName = ((AppUser) Session[Constants.SessionItem.User]).Username.ToString();
                 info = dbContext.dh_user.Single(e => e.username == userName);
             }
 
@@ -45,13 +45,14 @@ namespace NongSanShop.Controllers
         [HttpPost]
         public ActionResult Info([Bind(Include = "id,name,email,address,phone")] dh_user dhUser)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var currentUser = dbContext.dh_user.Find(dhUser.id);
-                if(currentUser == null)
+                if (currentUser == null)
                 {
                     return HttpNotFound();
                 }
+
                 currentUser.name = dhUser.name;
                 currentUser.email = dhUser.email;
                 currentUser.address = dhUser.address;
@@ -60,6 +61,11 @@ namespace NongSanShop.Controllers
                 dbContext.SaveChanges();
                 return RedirectToAction("Info");
             }
+            catch (Exception ex)
+            {
+                Logger.Error("Alter user details error", ex);
+            }
+
             return View(dhUser);
         }
 
