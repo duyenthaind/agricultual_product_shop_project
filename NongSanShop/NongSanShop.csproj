@@ -225,6 +225,7 @@
     <Content Include="wwwroot\images\large_right.png" />
     <Content Include="wwwroot\images\logo.png" />
     <Content Include="wwwroot\images\Maestro.png" />
+    <Content Include="wwwroot\images\nong-san-sach1.jpg" />
     <Content Include="wwwroot\images\PayPal.png" />
     <Content Include="wwwroot\images\post-img-2.png" />
     <Content Include="wwwroot\images\post-img-3.png" />
@@ -349,6 +350,7 @@
     <Content Include="Views\OrderProduct\Details.cshtml" />
     <Content Include="Views\OrderProduct\Edit.cshtml" />
     <Content Include="Views\OrderProduct\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
