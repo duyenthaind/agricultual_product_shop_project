@@ -106,15 +106,12 @@ namespace NongSanShop.Controllers
         {
             try
             {
-                var currentUser = db.dh_user.Find(dhUser.id);
-                if (currentUser == null)
-                {
-                    return HttpNotFound();
-                }
+                var oldPassword = db.dh_user.Where(p => p.id == dhUser.id)
+                    .Select(p => p.password).FirstOrDefault();
 
                 if (ModelState.IsValid)
                 {
-                    if (!dhUser.password.Equals(currentUser.password))
+                    if (!dhUser.password.Equals(oldPassword))
                     {
                         var hashedPassword = HMac256Helper.HashPassword(dhUser.password, dhUser.username);
                         dhUser.password = hashedPassword;
