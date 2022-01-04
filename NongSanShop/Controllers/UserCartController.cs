@@ -54,12 +54,12 @@ namespace NongSanShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int productId, int userId)
         {
-            if (userId == null)
+            var product = db.dh_product.FirstOrDefault(p => p.id == productId);
+            if (product == null)
             {
-                return RedirectToAction("Index", "Home");
+                return HttpNotFound();
             }
-            var product = db.dh_product.Where(p => p.id == productId).FirstOrDefault();
-            var cartEmpty = db.dh_cart.Where(c => c.product_id == productId&&c.user_id==userId).FirstOrDefault();
+            var cartEmpty = db.dh_cart.FirstOrDefault(c => c.product_id == productId&&c.user_id==userId);
             if (cartEmpty == null)
             {
                 dh_cart cartItem = new dh_cart();

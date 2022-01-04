@@ -6,6 +6,14 @@
     ViewBag.Title = "Trang chủ";
 }
 
+@{
+    var userObject = Session[Constants.SessionItem.User];
+    AppUser user = null;
+    if (userObject is AppUser)
+    {
+        user = (AppUser) userObject;
+    }
+}
 <!-- SLIDER Start
 ================================================== -->
 
@@ -133,7 +141,7 @@
                         </a>
                         <p class="price">Chỉ từ: @item.price VND</p>
                         <div>
-                            <a class="view-link shutter" href="@Url.Action("create", "UserCart", new { id = item.id, userId = ((AppUser)Session[Constants.SessionItem.User]).UserId)})">
+                            <a class="view-link shutter" href="@Url.Action("Create", "UserCart", new { productId = item.id, userId = user?.UserId ?? -1})">
                                 <i class="fa fa-plus-circle"></i>Thêm vào giỏ hàng
                             </a>
                         </div>
