@@ -1,4 +1,5 @@
-﻿
+﻿@using NongSanShop.Common
+@using NongSanShop.Models.Custom
 @{
     Layout = null;
 }
@@ -52,15 +53,28 @@
                     <div class="col-md-3 clearfix">
                         <ul class="login-cart">
                             <li>
-                                <a data-toggle="modal" data-target="#myModal" href="#">
-                                    <i class="fa fa-user"></i>
-                                    Đăng nhập
-                                </a>
+                                @if (Session[Constants.SessionItem.User] != null)
+                                {
+                                    <div style="display:flex;align-items:center">
+                                        @(((AppUser) Session[Constants.SessionItem.User]).Username)
+                                        <a href="@Url.Action("Logout","Home")">
+                                            <i class="fa fa-user"></i>
+                                            Đăng xuất
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login","Home")">
+                                        <i class="fa fa-user"></i>
+                                        Đăng nhập
+                                    </a>
+                                }
                             </li>
                             <li>
                                 <div class="cart dropdown">
-                                    <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Giỏ hàng(1)</a>
-                                    <div class="dropdown-menu dropup">
+                                    <a href="@Url.Action("Index","UserCart")"><i class="fa fa-shopping-cart"></i>Giỏ hàng(@Session["no_cart"])</a>
+                                    @*<div class="dropdown-menu dropup">
                                         <span class="caret"></span>
                                         <ul class="media-list">
                                             <li class="media">
@@ -74,7 +88,7 @@
                                             </li>
                                         </ul>
                                         <button class="btn btn-primary btn-sm">Checkout</button>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </li>
                         </ul>
@@ -201,14 +215,11 @@
                 </div>	<!-- /.navbar-collapse -->
             </div>	<!-- /.container-fluid -->
         </nav>	<!-- End of /.nav -->
-
         <!--Content-->
-         
+
         @RenderBody()
 
         <!--End Content-->
-
-        
         <!-- FOOTER Start
         ================================================== -->
 
