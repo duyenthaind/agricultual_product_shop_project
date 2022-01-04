@@ -17,20 +17,21 @@ namespace NongSanShop.Controllers
     [AdminAuthorizationFilter]
     public class AdminController : Controller
     {
-
         private static readonly ILog Logger = LogManager.GetLogger(nameof(AdminController));
 
         private readonly NongSanDB dbContext = new NongSanDB();
-        
+
         // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
+
         public ActionResult Info()
         {
             return View();
         }
+
         [SkipAction]
         public ActionResult Login()
         {
@@ -73,10 +74,10 @@ namespace NongSanShop.Controllers
                 {
                     throw new AuthorizationException("You have no authority to access this site");
                 }
-                
+
 
                 Session[Constants.SessionItem.User] = appUser;
-                
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -92,6 +93,21 @@ namespace NongSanShop.Controllers
         public string Test(string password, string username)
         {
             return HMac256Helper.HashPassword(password, username);
+        }
+
+        public ActionResult Logout()
+        {
+            try
+            {
+                Session[Constants.SessionItem.User] = null;
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Cannot perform logout action", ex);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
