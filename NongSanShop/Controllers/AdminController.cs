@@ -11,6 +11,8 @@ using NongSanShop.Filters;
 using NongSanShop.Models;
 using NongSanShop.Models.Custom.Builder;
 using NongSanShop.Util;
+using NongSanShop.Models.Custom;
+using System.Data.Entity;
 
 namespace NongSanShop.Controllers
 {
@@ -29,7 +31,36 @@ namespace NongSanShop.Controllers
 
         public ActionResult Info()
         {
-            return View();
+            dh_user info = null;
+            if (Session[Constants.SessionItem.User] != null)
+            {
+                string userName = ((AppUser)Session[Constants.SessionItem.User]).Username.ToString();
+                info = dbContext.dh_user.Single(e => e.username == userName);
+            }
+
+            return View(info);
+        }
+
+
+        [HttpPost]
+        public ActionResult Info([Bind(Include = "id,name,email,address,phone")] dh_user dhUser)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = dbContext.dh_user.Find(dhUser.id);
+                if(currentUser == null)
+                {
+                    return HttpNotFound();
+                }
+                currentUser.name = dhUser.name;
+                currentUser.email = dhUser.email;
+                currentUser.address = dhUser.address;
+                currentUser.phone = dhUser.phone;
+                dbContext.Entry(currentUser).State = EntityState.Modified;
+                dbContext.SaveChanges();
+                return RedirectToAction("Info");
+            }
+            return View(dhUser);
         }
 
         [SkipAction]
