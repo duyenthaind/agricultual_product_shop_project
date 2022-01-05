@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using log4net;
 using NongSanShop.Filters;
 using NongSanShop.Models;
+using PagedList;
 
 namespace NongSanShop.Controllers
 {
@@ -21,9 +22,22 @@ namespace NongSanShop.Controllers
         private NongSanDB db = new NongSanDB();
 
         // GET: Category
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.dh_category.ToList());
+            var dh_category = db.dh_category.Select(d => d);
+            dh_category = dh_category.OrderBy(d => d.id);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(dh_category.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult Display(int? page)
+        {
+            var dh_category = db.dh_category.Select(d=>d);
+            dh_category = dh_category.OrderBy(d => d.id);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(dh_category.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Category/Details/5
