@@ -44,6 +44,38 @@ namespace NongSanShop.Controllers
             return View();
         }
 
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
+        public ActionResult Store(int? id)
+        {
+            Logger.Info($"Current id {id}");
+            
+            ViewBag.Categories = dbContext.dh_category.Select(p => p).ToList();
+            var newestProducts = dbContext.dh_product.Take(8).ToList();
+            if (id != null)
+            {
+                
+                int categoryID = id.GetValueOrDefault();
+                var products = dbContext.dh_product.Where(p => p.category_id == categoryID);
+                
+                if (products != null && products.ToList().Count > 0)
+                {
+                    Logger.Info(products);
+                    newestProducts = products.Take(8).ToList();
+                }else
+                {
+                    newestProducts = new List<dh_product>();
+                }
+            }
+
+            ViewBag.NewestProduct = newestProducts;
+            
+            return View();
+        }
+
         public ActionResult Login()
         {
             return View();

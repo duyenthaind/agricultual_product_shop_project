@@ -1,0 +1,156 @@
+﻿@using NongSanShop.Models;
+@{
+    ViewBag.Title = "Store";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+    string imgPath = "~/wwwroot/uploads/products/";
+}
+
+<!-- PRODUCTS Start
+================================================== -->
+
+<section id="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="products-heading">
+                    <h2>SẢN PHẨM MỚI</h2>
+                </div>	<!-- End of /.Products-heading -->
+                <div class="product-grid">
+                    <ul>
+
+                        @foreach (dh_product item in ViewBag.NewestProduct)
+                        {
+
+                            <li>
+                                <div class="products">
+                                    <img src="@Url.Content(imgPath +item.avatar)" alt="">
+                                    <h4>@item.name</h4>
+                                    <p class="price">@string.Format("{0:#,### VNĐ}", Convert.ToDecimal(item.price))</p>
+                                    <div>
+                                        <a class="view-link shutter" href="#">
+                                            <i class="fa fa-plus-circle"></i>Add To Cart
+                                        </a>
+                                    </div>
+                                </div>	<!-- End of /.products -->
+                            </li>
+                        }
+
+                        <!--<li>
+                        <div class="products">
+                            <a href="#">
+                                <img src="images/product-image-8.jpg" alt="">
+                            </a>
+                            <a href="#">
+                                <h4>Amazing Italian Sauces</h4>
+                            </a>
+                            <p class="price">From: £69.99</p>
+                            <div>
+                                <a class="view-link shutter" href="#">
+                                    <i class="fa fa-plus-circle"></i>Add To Cart
+                                </a>
+                            </div>
+                        </div>-->
+                        <!-- End of /.products -->
+                        <!--</li>
+                        <li>
+                            <div class="products">
+                                <a href="#">
+                                    <img src="images/product-image-8.jpg" alt="">
+                                </a>
+                                <a href="#">
+                                    <h4>Amazing Italian Sauces</h4>
+                                </a>
+                                <p class="price">From: £69.99</p>
+                                <div>
+                                    <a class="view-link shutter" href="#">
+                                        <i class="fa fa-plus-circle"></i>Add To Cart
+                                    </a>
+                                </div>
+                            </div>-->
+                        <!-- End of /.products -->
+                        <!--</li>
+                        <li>
+                            <div class="products">
+                                <a href="#">
+                                    <img src="images/product-image-8.jpg" alt="">
+                                </a>
+                                <a href="#">
+                                    <h4>Amazing Italian Sauces</h4>
+                                </a>
+                                <p class="price">From: £69.99</p>
+                                <div>
+                                    <a class="view-link shutter" href="#">
+                                        <i class="fa fa-plus-circle"></i>Add To Cart
+                                    </a>
+                                </div>
+                            </div>-->
+                        <!-- End of /.products -->
+                        <!--</li>
+                        <li>
+                            <div class="products">
+                                <a href="#">
+                                    <img src="images/product-image-8.jpg" alt="">
+                                </a>
+                                <a href="#">
+                                    <h4>Amazing Italian Sauces</h4>
+                                </a>
+                                <p class="price">From: £69.99</p>
+                                <div>
+                                    <a class="view-link shutter" href="#">
+                                        <i class="fa fa-plus-circle"></i>Add To Cart
+                                    </a>
+                                </div>
+                            </div>-->
+                        <!-- End of /.products -->
+                        <!--</li>
+                        <li>
+                            <div class="products">
+                                <a href="#">
+                                    <img src="images/product-image-8.jpg" alt="">
+                                </a>
+                                <a href="#">
+                                    <h4>Amazing Italian Sauces</h4>
+                                </a>
+                                <p class="price">From: £69.99</p>
+                                <div>
+                                    <a class="view-link shutter" href="#">
+                                        <i class="fa fa-plus-circle"></i>Add To Cart
+                                    </a>
+                                </div>
+                            </div>-->
+                        <!-- End of /.products -->
+                        <!--</li>-->
+                        <!--  ... -->
+                    </ul>
+                </div>	<!-- End of /.products-grid -->
+                <!-- Pagination -->
+
+                <div class="pagination-bottom">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>	<!-- End of /.pagination -->
+                </div>
+            </div>	<!-- End of /.col-md-9 -->
+            <div class="col-md-3">
+                <div class="blog-sidebar">
+                    <div class="block">
+                        <h4>Danh mục</h4>
+                        <div class="list-group">
+                            @foreach (dh_category item in ViewBag.Categories)
+                            {
+                                <a href="@Url.Action("Store", "Home", new { id = item.id })" class="list-group-item">@item.name</a>
+                                
+                            }
+
+                        </div>
+                    </div>
+                </div>	<!-- End of /.col-md-3 -->
+
+            </div>	<!-- End of /.row -->
+        </div>	<!-- End of /.container -->
+</section>	<!-- End of Section -->

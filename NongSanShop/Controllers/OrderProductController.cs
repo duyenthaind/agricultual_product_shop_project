@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using log4net;
 using NongSanShop.Filters;
 using NongSanShop.Models;
+using PagedList;
 
 namespace NongSanShop.Controllers
 {
@@ -21,10 +22,13 @@ namespace NongSanShop.Controllers
         private NongSanDB db = new NongSanDB();
 
         // GET: OrderProduct
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var dh_order_product = db.dh_order_product.Include(d => d.dh_order).Include(d => d.dh_product);
-            return View(dh_order_product.ToList());
+            dh_order_product = dh_order_product.OrderBy(d => d.id);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(dh_order_product.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: OrderProduct/Details/5
@@ -45,7 +49,7 @@ namespace NongSanShop.Controllers
         // GET: OrderProduct/Create
         public ActionResult Create()
         {
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address");
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "code_name");
             ViewBag.product_id = new SelectList(db.dh_product, "id", "name");
             return View();
         }
@@ -64,7 +68,7 @@ namespace NongSanShop.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dhOrderProduct.order_id);
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "code_name", dhOrderProduct.order_id);
             ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhOrderProduct.product_id);
             return View(dhOrderProduct);
         }
@@ -81,7 +85,7 @@ namespace NongSanShop.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dhOrderProduct.order_id);
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "code_name", dhOrderProduct.order_id);
             ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhOrderProduct.product_id);
             return View(dhOrderProduct);
         }
@@ -99,7 +103,7 @@ namespace NongSanShop.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.order_id = new SelectList(db.dh_order, "id", "address", dhOrderProduct.order_id);
+            ViewBag.order_id = new SelectList(db.dh_order, "id", "code_name", dhOrderProduct.order_id);
             ViewBag.product_id = new SelectList(db.dh_product, "id", "name", dhOrderProduct.product_id);
             return View(dhOrderProduct);
         }

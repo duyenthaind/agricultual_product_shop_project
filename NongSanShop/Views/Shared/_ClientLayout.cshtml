@@ -193,22 +193,9 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav nav-main">
-                        <li class="active"><a href="#">TRANG CHỦ</a></li>
-                        <li><a href="products.html">CỬA HÀNG</a></li>
-                        <li><a href="blog.html">BLOG</a></li>
-                        <li><a href="blog-single.html">BÀI VIẾT</a></li>
-                        <li class="dropdown">
-                            <a href="#">
-                                TRANG
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </li> <!-- End of /.dropdown -->
+                        <li><a href="@Url.Action("Index","Home")">TRANG CHỦ</a></li>
+                        <li><a href="@Url.Action("Store","Home")">CỬA HÀNG</a></li>
+                        <li><a href="@Url.Action("Blog","Home")">BÀI VIẾT</a></li>
 
 
                     </ul> <!-- End of /.nav-main -->

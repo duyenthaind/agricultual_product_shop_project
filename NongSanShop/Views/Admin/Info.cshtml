@@ -46,7 +46,7 @@
                                 <p class="text-primary m-0 font-weight-bold">Thiết lập người dùng</p>
                             </div>
                             <div class="card-body">
-                                @using (Html.BeginForm())
+                                @using (Html.BeginForm("Info","Admin",FormMethod.Post))
                                 {
                                     @Html.HiddenFor(model => model.id)
                                     <div class="form-row">
@@ -70,7 +70,11 @@
                                             <div class="form-group"><label for="phone"><strong>Số điện thoại</strong></label><input class="form-control" type="text" id="phone" value="@Html.DisplayFor(model => model.phone)" name="phone"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Lưu</button></div>
+                                    <div class="form-row">
+                                        <div class="col-1">
+                                            <div class="form-group"><button class="btn btn-primary btn-xs" type="submit">Lưu</button></div>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -80,7 +84,8 @@
 
                             </div>
                             <div class="card-body">
-                                <form>
+                                @using (Html.BeginForm())
+                                {
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group"><label for="password"><strong>Mật khẩu cũ</strong></label><input class="form-control" type="password" id="password" value="@Html.DisplayFor(model=>model.password)" name="password"></div>
@@ -91,8 +96,13 @@
                                             <div class="form-group"><label for="newpass"><strong>Mật khẩu mới</strong></label><input class="form-control" type="password" id="newpass" name="newpass"></div>
                                         </div>
                                     </div>
+                                    <div class="form-row">
+                                        <div class="col-1">
+                                            <div class="form-group"><button class="btn btn-primary btn-xs" type="submit">Cập nhật</button></div>
+                                        </div>
+                                    </div>
+                                }
 
-                                </form>
                             </div>
                         </div>
                     </div>
