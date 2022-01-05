@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using NongSanShop.Filters;
 using NongSanShop.Models;
 
 namespace NongSanShop.Controllers
 {
+    [UserAuthorizationFilter]
     public class UserCartController : Controller
     {
         private NongSanDB db = new NongSanDB();
@@ -25,7 +27,7 @@ namespace NongSanShop.Controllers
         }
 
         // GET: UserCart/Details/5
-        public ActionResult Details(int? id)
+        /*public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -37,21 +39,21 @@ namespace NongSanShop.Controllers
                 return HttpNotFound();
             }
             return View(dh_cart);
-        }
+        }*/
 
         // GET: UserCart/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             ViewBag.product_id = new SelectList(db.dh_product, "id", "name");
             ViewBag.user_id = new SelectList(db.dh_user, "id", "username");
             return View();
-        }
+        }*/
 
         // POST: UserCart/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
         public ActionResult Create(int productId, int userId)
         {
             var product = db.dh_product.FirstOrDefault(p => p.id == productId);

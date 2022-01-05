@@ -35,6 +35,8 @@ namespace NongSanShop.Models
         public long? created { get; set; }
 
         public long? updated { get; set; }
+        
+        public string phone { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dh_order_product> dh_order_product { get; set; }
