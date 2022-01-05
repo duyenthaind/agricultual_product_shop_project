@@ -10,6 +10,7 @@ using log4net;
 using log4net.Core;
 using NongSanShop.Filters;
 using NongSanShop.Models;
+using PagedList;
 
 namespace NongSanShop.Controllers
 {
@@ -21,10 +22,13 @@ namespace NongSanShop.Controllers
         private NongSanDB db = new NongSanDB();
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var dh_product = db.dh_product.Include(d => d.dh_category);
-            return View(dh_product.ToList());
+            dh_product = dh_product.OrderBy(d => d.id);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(dh_product.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Product/Details/5
