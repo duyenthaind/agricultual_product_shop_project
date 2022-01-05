@@ -70,9 +70,9 @@ namespace NongSanShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePass()
+        public ActionResult UpdatePass(FormCollection formCollection)
         {
-            return View();
+            return View("Info");
         }
 
         [SkipAction]
