@@ -5,47 +5,49 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container-fluid">
+    <div>
+        <h4>Chi tiết</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Mã đơn hàng
+            </dt>
 
-<div>
-    <h4>dh_order_product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dh_order.address)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.dh_order.code_name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dh_order.address)
-        </dd>
+            <dt>
+                Tên sản phẩm
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dh_product.name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.dh_product.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dh_product.name)
-        </dd>
+            <dt>
+                Giá
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.price)
-        </dd>
+            <dt>
+                Số lượng
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.quantity)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.quantity)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.quantity)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

@@ -69,6 +69,12 @@ namespace NongSanShop.Controllers
             return View(dhUser);
         }
 
+        [HttpPost]
+        public ActionResult UpdatePass()
+        {
+            return View();
+        }
+
         [SkipAction]
         public ActionResult Login()
         {
