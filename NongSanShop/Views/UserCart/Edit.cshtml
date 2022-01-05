@@ -1,23 +1,20 @@
 ﻿@model NongSanShop.Models.dh_cart
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Thay đổi giỏ hàng";
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
 }
 
-<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>dh_cart</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             @Html.LabelFor(model => model.user_id, "user_id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("user_id", null, htmlAttributes: new { @class = "form-control" })
@@ -25,15 +22,15 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="container" style="display:flex;align-items: center;">
+            <label>Số lượng</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
@@ -41,7 +38,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             @Html.LabelFor(model => model.product_id, "product_id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("product_id", null, htmlAttributes: new { @class = "form-control" })
@@ -49,7 +46,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             @Html.LabelFor(model => model.created, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.created, new { htmlAttributes = new { @class = "form-control" } })
@@ -57,7 +54,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             @Html.LabelFor(model => model.updated, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.updated, new { htmlAttributes = new { @class = "form-control" } })
@@ -65,14 +62,14 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="container" style="display:flex;margin:5px 0px; justify-content: center;">
+            <div>
+                <input type="submit" value="Cập nhật" class="btn btn-primary" style="margin-right:5px" />
+            </div>
+            <div>
+                <a href='@Url.Action("Index","UserCart", null)' class="btn btn-danger">Quay lại</a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

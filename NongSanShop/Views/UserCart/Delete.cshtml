@@ -5,69 +5,19 @@
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>dh_cart</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dh_product.name)
-        </dt>
+<div style="width:100%;text-align:center">
+    <h3>Bạn có chăc chắn xóa không @Html.DisplayFor(model => model.dh_product.name)</h3>
+    <div style="margin:5px 0px">
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.dh_product.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dh_user.username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dh_user.username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.updated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.updated)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-primary" /> 
+                <span>
+                    <a href='@Url.Action("Index","UserCart", null)' class="btn btn-danger">Quay lại</a>
+                </span>
+            </div>
+        }
+    </div>
 </div>
