@@ -15,15 +15,10 @@
 <section id="topic-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <h1>Bài viết</h1>
             </div>	<!-- End of /.col-md-4 -->
-            <div class="col-md-8 hidden-xs">
-                <ol class="breadcrumb pull-right">
-                    <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
-                    <li class="active">Bài viết</li>
-                </ol>
-            </div>	<!-- End of /.col-md-8 -->
+            
         </div>	<!-- End of /.row -->
     </div>	<!-- End of /.container -->
 </section>	<!-- End of /#Topic-header -->
@@ -68,11 +63,13 @@
                         </li>
                     }
                 </ul>	<!-- End of /.blog-zone -->
-
                 <br />
                 Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
                 @Html.PagedListPager(Model, page => Url.Action("Blog", new { page }))
+
             </div>	<!-- End of /.col-md-9 -->
+            
         </div>	<!-- End of /.row -->
     </div>	<!-- End of /.container -->
+
 </section>	<!-- End of /#Blog -->
