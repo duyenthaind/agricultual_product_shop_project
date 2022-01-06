@@ -34,21 +34,25 @@
                     @Html.DisplayFor(modelItem => item.quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.price)
+                    @string.Format("{0:#,### VNĐ}", Convert.ToDecimal(item.price))
                 </td>
                 <td>
                     @{
                         double gia = Convert.ToDouble(item.price);
                         int sl = Convert.ToInt32(item.quantity);
                         double tong = gia * sl;
+                        string t=string.Format("{0:#,### VNĐ}", Convert.ToDecimal(tong));
                     }
-                    @tong
+                    @t
                 </td>
 
                 <td>
-                    @Html.ActionLink("Sửa", "Edit", new {id = item.id}) |
-                    @*@Html.ActionLink("Chi tiết", "Details", new { id=item.id }) |*@
-                    @Html.ActionLink("Xóa", "Delete", new {id = item.id})
+                    <span class="btn btn-info text-white">
+                        @Html.ActionLink("Cập nhật", "Edit", new {id = item.id}, new { @style="color:white" })
+                    </span>
+                    <span class="btn btn-danger text-white">
+                        @Html.ActionLink("Xóa", "Delete", new {id = item.id}, new { @style = "color:white" })
+                    </span>
                 </td>
             </tr>
         }
