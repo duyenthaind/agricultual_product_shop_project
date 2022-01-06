@@ -40,7 +40,10 @@
 
                             <li>
                                 <div class="products">
-                                    <img src="@Url.Content(imgPath + item.avatar)" alt="Ảnh">
+                                    <a href="@Url.Action("ProductDetail","Home", new { id = item.id })">
+                                        <img src="@Url.Content(imgPath + item.avatar)" alt="Ảnh">
+                                    </a>
+                                    
                                     <h4>@item.name</h4>
                                     <p class="price">@string.Format("{0:#,### VNĐ}", Convert.ToDecimal(item.price))</p>
                                     <div>
