@@ -78,33 +78,6 @@
                                 }
                             </div>
                         </div>
-                        <div class="card shadow">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 font-weight-bold">Đổi mật khẩu</p>
-
-                            </div>
-                            <div class="card-body">
-                                @using (Html.BeginForm())
-                                {
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group"><label for="password"><strong>Mật khẩu cũ</strong></label><input class="form-control" type="password" id="password" value="@Html.DisplayFor(model=>model.password)" name="password"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group"><label for="newpass"><strong>Mật khẩu mới</strong></label><input class="form-control" type="password" id="newpass" name="newpass"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-1">
-                                            <div class="form-group"><button class="btn btn-primary btn-xs" type="submit">Cập nhật</button></div>
-                                        </div>
-                                    </div>
-                                }
-
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

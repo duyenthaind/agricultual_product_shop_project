@@ -11,7 +11,7 @@
     AppUser user = null;
     if (userObject is AppUser)
     {
-        user = (AppUser) userObject;
+        user = (AppUser)userObject;
     }
 }
 <!-- SLIDER Start
@@ -95,7 +95,7 @@
                         {
                             <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
-                                    <a class="catagotie-head" href="blog-single.html">
+                                    <a class="catagotie-head" href="@Url.Action("Store", "Home", new { id = item.id })">
                                         <img src="~/wwwroot/images/@item.avatar" alt="category image">
                                         <h3>@item.name</h3>
                                     </a>
@@ -133,12 +133,10 @@
             {
                 <div class="col-md-3">
                     <div class="products">
-                        <a href="single-product.html">
+                        <a href="@Url.Action("ProductDetail","Home", new { id = item.id })">
                             <img src="~/wwwroot/uploads/products/@item.avatar" alt="">
                         </a>
-                        <a href="single-product.html">
-                            <h4>@item.name</h4>
-                        </a>
+                        <h4>@item.name</h4>
                         <p class="price">Chỉ từ: @item.price VND</p>
                         <div>
                             <a class="view-link shutter" href="@Url.Action("Create", "UserCart", new { productId = item.id, userId = user?.UserId ?? -1})">

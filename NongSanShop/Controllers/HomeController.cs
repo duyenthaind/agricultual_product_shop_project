@@ -9,6 +9,7 @@ using NongSanShop.CustomException;
 using NongSanShop.Models;
 using NongSanShop.Models.Custom.Builder;
 using NongSanShop.Util;
+using PagedList;
 
 namespace NongSanShop.Controllers
 {
@@ -44,12 +45,17 @@ namespace NongSanShop.Controllers
             return View();
         }
 
-        public ActionResult Blog()
+        public ActionResult Blog(int? page)
         {
-            return View();
+
+            var dh_blog = dbContext.dh_blog.Select(d => d);
+            dh_blog = dh_blog.OrderBy(d => d.id);
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(dh_blog.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Store(int? id)
+        public ActionResult Store(int? id, int? page)
         {
             Logger.Info($"Current id {id}");
             
@@ -71,9 +77,12 @@ namespace NongSanShop.Controllers
                 }
             }
 
-            ViewBag.NewestProduct = newestProducts;
+            //ViewBag.NewestProduct = newestProducts;
+
             
-            return View();
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(newestProducts.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Login()
@@ -142,6 +151,26 @@ namespace NongSanShop.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ProductDetail(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var product = dbContext.dh_product.Find(id);
+                if(product == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    return View(product);
+                }
+            }
         }
     }
 }

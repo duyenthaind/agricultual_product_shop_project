@@ -13,23 +13,6 @@
     <h3 class="text-dark mb-4">Đơn hàng</h3>
     <div class="card shadow">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-6 text-nowrap">
-                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                        <label>
-                            Hiển thị&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm">
-                                <option value="10" selected="">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>&nbsp;
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Tìm kiếm"></label></div>
-                </div>
-            </div>
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table my-0" id="dataTable">
                     <thead>
@@ -45,6 +28,9 @@
                             </th>
                             <th>
                                 Email
+                            </th>
+                            <th>
+                                Điện thoại
                             </th>
                             <th>
                                 Code đơn hàng
@@ -78,10 +64,27 @@
                                     @Html.DisplayFor(modelItem => item.email)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.phone)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.code_name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.status)
+                                    @{
+                                        var status = item.status;
+                                        switch (status)
+                                        {
+                                            case 1:
+                                                @Html.Label("Chưa thanh toán");
+                                                break;
+                                            case 2:
+                                                @Html.Label("Đã thanh toán");
+                                                break;
+                                            default:
+                                                @Html.Label("Đang chờ");
+                                                break;
+                                        }
+                                    }
                                 </td>
                                 <td>
                                     @{
@@ -107,51 +110,6 @@
                             </tr>
                         }
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>
-                                <strong>
-                                    Tên tài khoản
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Địa chỉ
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Tên người dùng
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Email
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Code đơn hàng
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Trạng thái
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Thời gian tạo
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    Thời gian cập nhật
-                                </strong>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
 
