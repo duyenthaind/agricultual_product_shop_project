@@ -213,6 +213,9 @@
     <Content Include="wwwroot\images\avatars\avatar3.jpeg" />
     <Content Include="wwwroot\images\avatars\avatar4.jpeg" />
     <Content Include="wwwroot\images\avatars\avatar5.jpeg" />
+    <Content Include="wwwroot\images\banner1.jpg" />
+    <Content Include="wwwroot\images\banner2.jpg" />
+    <Content Include="wwwroot\images\banner3.jpg" />
     <Content Include="wwwroot\images\blog-1.jpg" />
     <Content Include="wwwroot\images\category-image-1.jpg" />
     <Content Include="wwwroot\images\category-image-2.jpg" />
@@ -235,6 +238,7 @@
     <Content Include="wwwroot\images\kewledits.weebly %28120%29.png" />
     <Content Include="wwwroot\images\large_left.png" />
     <Content Include="wwwroot\images\large_right.png" />
+    <Content Include="wwwroot\images\logo-nong-san.png" />
     <Content Include="wwwroot\images\logo.png" />
     <Content Include="wwwroot\images\Maestro.png" />
     <Content Include="wwwroot\images\nong-san-sach1.jpg" />
