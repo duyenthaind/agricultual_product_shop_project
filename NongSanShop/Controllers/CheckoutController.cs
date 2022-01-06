@@ -22,6 +22,11 @@ namespace NongSanShop.Controllers
             return View();
         }
 
+        public ActionResult Success()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Checkout(FormCollection formCollection)
         {
@@ -76,7 +81,7 @@ namespace NongSanShop.Controllers
                     return RedirectToAction("Index");
                 }
                 // result order page
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Success");
             }
             catch (Exception ex)
             {

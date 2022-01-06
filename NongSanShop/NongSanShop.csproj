@@ -187,6 +187,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Home\Checkout.cshtml" />
+    <Content Include="Views\Shared\icon_mat_cuoi.png" />
     <Content Include="Web.config_sample" />
     <Content Include="wwwroot\bootstrap\css\bootstrap.min.css" />
     <Content Include="wwwroot\bootstrap\js\bootstrap.min.js" />
@@ -230,6 +231,7 @@
     <Content Include="wwwroot\images\dogs\image3.jpeg" />
     <Content Include="wwwroot\images\food-ad.png" />
     <Content Include="wwwroot\images\footer-logo.png" />
+    <Content Include="wwwroot\images\icon_mat_cuoi.png" />
     <Content Include="wwwroot\images\kewledits.weebly %28120%29.png" />
     <Content Include="wwwroot\images\large_left.png" />
     <Content Include="wwwroot\images\large_right.png" />
@@ -369,6 +371,7 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Store.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
+    <Content Include="Views\Checkout\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
