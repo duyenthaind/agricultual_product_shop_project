@@ -44,6 +44,14 @@
             </dd>
 
             <dt>
+                Điện thoại
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.phone)
+            </dd>
+
+            <dt>
                 Code đơn hàng
             </dt>
 
@@ -56,7 +64,21 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.status)
+                @{
+                    var status = Model.status;
+                    switch (status)
+                    {
+                        case 1:
+                            @Html.Label("Chưa thanh toán");
+                            break;
+                        case 2:
+                            @Html.Label("Đã thanh toán");
+                            break;
+                        default:
+                            @Html.Label("Đang chờ");
+                            break;
+                    }
+                }
             </dd>
 
             <dt>

@@ -28,7 +28,7 @@ namespace NongSanShop.Controllers
             dh_cart = dh_cart.OrderBy(d => d.id);
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(dh_cart.ToPagedList(pageSize,pageNumber));
+            return View(dh_cart.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Cart/Details/5

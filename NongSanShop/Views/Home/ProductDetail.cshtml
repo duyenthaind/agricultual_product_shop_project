@@ -1,0 +1,58 @@
+﻿@model NongSanShop.Models.dh_product
+@using NongSanShop.Common
+@using NongSanShop.Models.Custom
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+    string imgPath = "~/wwwroot/uploads/products/" + Model.avatar;
+}
+
+@{
+    var userObject = Session[Constants.SessionItem.User];
+    AppUser user = null;
+    if (userObject is AppUser)
+    {
+        user = (AppUser)userObject;
+    }
+}
+
+<!-- breadcrumb Start
+    ================================================== -->
+
+<section id="topic-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>@Html.DisplayFor(model => model.name)</h1>
+                <p></p>
+            </div>	<!-- /.col-md-4 -->
+            
+        </div>	<!-- /.row -->
+    </div>	<!-- /.container-->
+</section><!-- /Section -->
+
+
+
+
+<section id="single-product" style="padding-bottom: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-product-img">
+                    <img src="@Url.Content(imgPath)" alt="Ảnh">
+                </div>
+
+            </div> <!-- End of /.col-md-5 -->
+            <div class="col-md-6">
+                <div class="block">
+                    <div class="product-des">
+                        <h4>@Html.DisplayFor(model => model.name)</h4>
+                        <p class="price">@string.Format("{0:#,### VNĐ}", Convert.ToDecimal(Model.price))</p>
+                        <p>@Html.DisplayFor(model => model.description)</p>
+                        <a class="view-link" href="@Url.Action("Create", "UserCart", new { productId = Model.id, userId = user?.UserId ?? -1})"><i class="fa fa-plus-circle"></i>Add To Cart</a>
+                    </div>	<!-- End of /.product-des -->
+                </div> <!-- End of /.block -->
+            </div>	<!-- End of /.col-md-4 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.Container -->
+</section> <!-- End of /.Single-product -->

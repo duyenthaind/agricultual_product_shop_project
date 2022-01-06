@@ -58,7 +58,7 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,user_id,address,name,email,code_name,status,created,updated")] dh_order dhOrder)
+        public ActionResult Create([Bind(Include = "id,user_id,address,name,email,phone,code_name,status,created,updated")] dh_order dhOrder)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace NongSanShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,user_id,address,name,email,code_name,status,created,updated")] dh_order dhOrder)
+        public ActionResult Edit([Bind(Include = "id,user_id,address,name,email,phone,code_name,status,created,updated")] dh_order dhOrder)
         {
             if (ModelState.IsValid)
             {
