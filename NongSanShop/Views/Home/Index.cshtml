@@ -96,7 +96,7 @@
                             <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
                                     <a class="catagotie-head" href="@Url.Action("Store", "Home", new { id = item.id })">
-                                        <img src="~/wwwroot/images/@item.avatar" alt="category image">
+                                        <img src="~/wwwroot/uploads/categories/@item.avatar" alt="category image" height="220px">
                                         <h3>@item.name</h3>
                                     </a>
                                     <div class="caption">
@@ -129,7 +129,7 @@
                 <div class="col-md-3">
                     <div class="products">
                         <a href="@Url.Action("ProductDetail","Home", new { id = item.id })">
-                            <img src="~/wwwroot/uploads/products/@item.avatar" alt="">
+                            <img src="~/wwwroot/uploads/products/@item.avatar" alt="" height="200px">
                         </a>
                         <h4>@item.name</h4>
                         <p class="price">Chỉ từ: @item.price VND</p>
